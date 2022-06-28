@@ -9,13 +9,16 @@
 /* Begin PBXBuildFile section */
 		DC18B6572860F61600C90E88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18B6562860F61600C90E88 /* AppDelegate.swift */; };
 		DC18B6592860F61600C90E88 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18B6582860F61600C90E88 /* SceneDelegate.swift */; };
-		DC18B65B2860F61600C90E88 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18B65A2860F61600C90E88 /* ViewController.swift */; };
 		DC18B65E2860F61600C90E88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC18B65C2860F61600C90E88 /* Main.storyboard */; };
 		DC18B6602860F61A00C90E88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC18B65F2860F61A00C90E88 /* Assets.xcassets */; };
 		DC18B6632860F61A00C90E88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC18B6612860F61A00C90E88 /* LaunchScreen.storyboard */; };
 		DC18B66E2860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18B66D2860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests.swift */; };
 		DC18B6782860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18B6772860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022UITests.swift */; };
 		DC18B67A2860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18B6792860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022UITestsLaunchTests.swift */; };
+		DC18B68B28610FC900C90E88 /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18B68A28610FC900C90E88 /* Converter.swift */; };
+		DC18B68D2861250200C90E88 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18B68C2861250200C90E88 /* ViewController.swift */; };
+		DC18B68F28618FD100C90E88 /* ConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18B68E28618FD100C90E88 /* ConverterViewController.swift */; };
+		DC33A1EE2862F83400A837E0 /* NetworkJsonFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33A1ED2862F83400A837E0 /* NetworkJsonFetcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,16 +42,20 @@
 		DC18B6532860F61600C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = P09_Desruelles_Rodolphe_L1_projet_xcode_062022.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC18B6562860F61600C90E88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC18B6582860F61600C90E88 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DC18B65A2860F61600C90E88 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DC18B65D2860F61600C90E88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DC18B65F2860F61A00C90E88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC18B6622860F61A00C90E88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		DC18B6642860F61A00C90E88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC18B6642860F61A00C90E88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "P09_Desruelles_Rodolphe_L1_projet_xcode_062022/Supporting Files/Info.plist"; sourceTree = SOURCE_ROOT; };
 		DC18B6692860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC18B66D2860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests.swift; sourceTree = "<group>"; };
 		DC18B6732860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = P09_Desruelles_Rodolphe_L1_projet_xcode_062022UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC18B6772860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P09_Desruelles_Rodolphe_L1_projet_xcode_062022UITests.swift; sourceTree = "<group>"; };
 		DC18B6792860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P09_Desruelles_Rodolphe_L1_projet_xcode_062022UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DC18B68A28610FC900C90E88 /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
+		DC18B68C2861250200C90E88 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DC18B68E28618FD100C90E88 /* ConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewController.swift; sourceTree = "<group>"; };
+		DC2FD5E2286AD93400143ECA /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
+		DC33A1ED2862F83400A837E0 /* NetworkJsonFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkJsonFetcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +106,10 @@
 		DC18B6552860F61600C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022 */ = {
 			isa = PBXGroup;
 			children = (
-				DC18B6562860F61600C90E88 /* AppDelegate.swift */,
-				DC18B6582860F61600C90E88 /* SceneDelegate.swift */,
-				DC18B65A2860F61600C90E88 /* ViewController.swift */,
-				DC18B65C2860F61600C90E88 /* Main.storyboard */,
-				DC18B65F2860F61A00C90E88 /* Assets.xcassets */,
-				DC18B6612860F61A00C90E88 /* LaunchScreen.storyboard */,
-				DC18B6642860F61A00C90E88 /* Info.plist */,
+				DC18B6892860F91500C90E88 /* Supporting Files */,
+				DC18B6882860F8F800C90E88 /* Model */,
+				DC18B6872860F8BE00C90E88 /* Controller */,
+				DC18B6862860F87E00C90E88 /* View */,
 			);
 			path = P09_Desruelles_Rodolphe_L1_projet_xcode_062022;
 			sourceTree = "<group>";
@@ -125,6 +129,45 @@
 				DC18B6792860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022UITestsLaunchTests.swift */,
 			);
 			path = P09_Desruelles_Rodolphe_L1_projet_xcode_062022UITests;
+			sourceTree = "<group>";
+		};
+		DC18B6862860F87E00C90E88 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DC18B65C2860F61600C90E88 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DC18B6872860F8BE00C90E88 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DC18B68C2861250200C90E88 /* ViewController.swift */,
+				DC18B68E28618FD100C90E88 /* ConverterViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DC18B6882860F8F800C90E88 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DC18B68A28610FC900C90E88 /* Converter.swift */,
+				DC33A1ED2862F83400A837E0 /* NetworkJsonFetcher.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DC18B6892860F91500C90E88 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DC18B6562860F61600C90E88 /* AppDelegate.swift */,
+				DC18B6582860F61600C90E88 /* SceneDelegate.swift */,
+				DC18B65F2860F61A00C90E88 /* Assets.xcassets */,
+				DC18B6612860F61A00C90E88 /* LaunchScreen.storyboard */,
+				DC18B6642860F61A00C90E88 /* Info.plist */,
+				DC2FD5E2286AD93400143ECA /* Secret.xcconfig */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,8 +301,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC18B65B2860F61600C90E88 /* ViewController.swift in Sources */,
+				DC18B68B28610FC900C90E88 /* Converter.swift in Sources */,
+				DC18B68F28618FD100C90E88 /* ConverterViewController.swift in Sources */,
+				DC33A1EE2862F83400A837E0 /* NetworkJsonFetcher.swift in Sources */,
 				DC18B6572860F61600C90E88 /* AppDelegate.swift in Sources */,
+				DC18B68D2861250200C90E88 /* ViewController.swift in Sources */,
 				DC18B6592860F61600C90E88 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,6 +364,7 @@
 /* Begin XCBuildConfiguration section */
 		DC18B67B2860F61B00C90E88 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC2FD5E2286AD93400143ECA /* Secret.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -367,7 +414,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -379,6 +426,7 @@
 		};
 		DC18B67C2860F61B00C90E88 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC2FD5E2286AD93400143ECA /* Secret.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -422,7 +470,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -440,7 +488,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = P09_Desruelles_Rodolphe_L1_projet_xcode_062022/Info.plist;
+				INFOPLIST_FILE = "P09_Desruelles_Rodolphe_L1_projet_xcode_062022/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -467,7 +515,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = P09_Desruelles_Rodolphe_L1_projet_xcode_062022/Info.plist;
+				INFOPLIST_FILE = "P09_Desruelles_Rodolphe_L1_projet_xcode_062022/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
