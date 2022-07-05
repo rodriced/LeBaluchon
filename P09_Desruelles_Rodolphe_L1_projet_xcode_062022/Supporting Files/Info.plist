@@ -4,6 +4,10 @@
 <dict>
 	<key>FIXER_IO_API_KEY</key>
 	<string>$(FIXER_IO_API_KEY)</string>
+	<key>MICROSOFT_TRANSLATOR_SUBSCRIPTION_KEY</key>
+	<string>$(MICROSOFT_TRANSLATOR_SUBSCRIPTION_KEY)</string>
+	<key>MICROSOFT_TRANSLATOR_SUBSCRIPTION_REGION</key>
+	<string>$(MICROSOFT_TRANSLATOR_SUBSCRIPTION_REGION)</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
