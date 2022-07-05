@@ -7,97 +7,15 @@
 
 import Foundation
 
-struct Rates: Decodable {
+struct RatesData: Decodable, Equatable {
     let success: Bool
     let timestamp: Int
     let base: String
     let date: String
     let rates: [String: Double]
     
-    static var decoder = JSONDecoder()
-}
-
-// class RatesService {
-//    static let shared = RatesService()
-//    private init() {}
-//
-//    static let ratesBaseUrl = "https://api.apilayer.com/fixer/latest"
-//    static let rateUrl = { (base: String, target: String) in "\(RatesService.ratesBaseUrl)?base=\(base)&symbols=\(target)"}
-//
-//    static let fetcher = NetworkJsonFetcher()
-//
-//    func getRatesSample() -> Rates {
-//        return Rates(
-//            success: true,
-//            timestamp: 1656070863,
-//            base: "EUR",
-//            date: "2022-06-24",
-//            rates: ["USD": 1.053507]
-//        )
-//    }
-//
-//    func getRates(baseCurrency: String, targetCurrency: String, completionHandler: @escaping (Rates?) -> Void) {
-//        completionHandler(self.getRatesSample())
-//
-// //        Self.fetcher.fetchJson(Self.rateUrl(, headers: ["apikey": ""])
-// //            { rates in
-// //                completionHandler(rates)
-// //            }
-//    }
-// }
-
-class ConverterService {
-    let testing = true
-
-    static let shared = ConverterService()
-    
-    private init() {
-        apiKey = Bundle.main.infoDictionary?["FIXER_IO_API_KEY"] as? String
-    }
-    
-    private let apiKey: String?
-    
-    static let ratesBaseUrl = "https://api.apilayer.com/fixer/latest"
-    static let rateUrl = { (base: String, target: String) in "\(ConverterService.ratesBaseUrl)?base=\(base)&symbols=\(target)" }
-
-    static let ratesFetcher = NetworkJsonFetcher()
-    
-    func fetchRates(baseCurrency: String, targetCurrency: String, completionHandler: @escaping (Rates?) -> Void) {
-        guard !testing else {
-            completionHandler(getRatesSample())
-            return
-        }
-        
-        guard let apiKey = apiKey else {
-            print("Error : No fixer.io api key defined")
-            return
-        }
-        
-        let url = Self.rateUrl(baseCurrency, targetCurrency)
-        
-        Self.ratesFetcher.fetchJson(url, headers: ["apikey": apiKey])
-            { rates in
-                completionHandler(rates)
-            }
-    }
-    
-    func getConverter(baseCurrency: String, targetCurrency: String, completionHandler: @escaping (Converter?) -> Void) {
-        fetchRates(baseCurrency: baseCurrency, targetCurrency: targetCurrency) { rates in
-            guard let rates = rates else {
-                print("Converter not ready")
-                completionHandler(nil)
-                return
-            }
-
-            let rate = rates.rates[targetCurrency]!
-            let converter = Converter(baseCurrency: baseCurrency, targetCurrency: targetCurrency, rate: rate, rateDate: rates.date)
-
-            completionHandler(converter)
-        }
-    }
-    
-    func getRatesSample() -> Rates {
-        return Rates(
+    static func getSample() -> RatesData {
+        return RatesData(
             success: true,
             timestamp: 1656070863,
             base: "EUR",
@@ -105,23 +23,72 @@ class ConverterService {
             rates: ["USD": 1.053507]
         )
     }
-
 }
+
+class InvalidRatesData: Error {}
+
+struct RatesRequestData {
+    let baseCurrency: String
+    let targetCurrencies: [String]
+    
+    init(baseCurrency: String, targetCurrency:String) {
+        self.baseCurrency = baseCurrency
+        self.targetCurrencies = [targetCurrency]
+    }
+}
+
+struct RatesRequest: APIRequest {
+    static let decoder = JSONDecoder()
+
+    static let apiKey = Bundle.main.infoDictionary?["FIXER_IO_API_KEY"] as? String
+
+    func makeRequest(from data: RatesRequestData) throws -> URLRequest {
+        var components = URLComponents(string: "https://api.apilayer.com/fixer/latest")!
+        components.queryItems = [
+            URLQueryItem(name: "base", value: data.baseCurrency),
+            URLQueryItem(name: "symbols", value: data.targetCurrencies.joined(separator: ","))
+        ]
+
+        var request = URLRequest(url: components.url!)
+        Self.apiKey.map {
+            request.addValue($0, forHTTPHeaderField: "apikey")
+        }
+
+        return request
+    }
+
+    func parseResponse(data: Data) throws -> RatesData {
+        let ratesData = try Self.decoder.decode(RatesData.self, from: data)
+        if !ratesData.success {
+            throw InvalidRatesData()
+        }
+        return ratesData
+    }
+}
+
 
 class Converter {
     let baseCurrency: String
     let targetCurrency: String
-    
+
     let rate: Double
     let rateDate: String
     
+    convenience init?(ratesData: RatesData) {
+        guard ratesData.rates.count == 1, let (targetCurrency, rate) = ratesData.rates.first else {
+            return nil
+        }
+        
+        self.init(baseCurrency: ratesData.base, targetCurrency: targetCurrency, rate: rate, rateDate: ratesData.date)
+    }
+
     init(baseCurrency: String, targetCurrency: String, rate: Double, rateDate: String) {
         self.baseCurrency = baseCurrency
         self.targetCurrency = targetCurrency
         self.rate = rate
         self.rateDate = rateDate
     }
-    
+
     public func convert(_ amount: Double) -> Double {
         return amount * rate
     }

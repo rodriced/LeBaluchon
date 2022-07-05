@@ -8,6 +8,9 @@
 import UIKit
 
 class ConverterViewController: UIViewController {
+    let baseCurrency = "EUR"
+    let targetCurrency = "USD"
+
     private static var resultFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -17,11 +20,15 @@ class ConverterViewController: UIViewController {
         return formatter
     }()
 
-    let converterService = ConverterService.shared
+//    let converterService = ConverterService.shared
+    let testing = true
+
+    let ratesLoader = APIRequestLoader(apiRequest: RatesRequest())
     var converter: Converter?
 
     @IBOutlet var rateLabel: UILabel!
     @IBOutlet var rateLoadingIndicator: UIActivityIndicatorView!
+    @IBOutlet var rateErrorImage: UIImageView!
 
     @IBOutlet var amountTextField: UITextField!
 
@@ -31,6 +38,18 @@ class ConverterViewController: UIViewController {
         updateResultLabel()
     }
 
+    let rateLoadingFailureAlert: UIAlertController = {
+        let alertVC = UIAlertController(title: "Erreur", message: "Impossible de récupérer le cours.", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        return alertVC
+    }()
+
+//    func presentRateLoadingFailureAlert() {
+//        let alertVC = UIAlertController(title: "Erreur", message: "Impossible de récupérer le cours.", preferredStyle: .alert)
+//        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+//        present(alertVC, animated: true, completion: nil)
+//    }
+
     func updateResultLabel() {
         guard let amountText = amountTextField.text, !amountText.isEmpty else {
             resultLabel.text = ""
@@ -38,30 +57,24 @@ class ConverterViewController: UIViewController {
         }
 
         guard let amount = Double(amountText) else {
-            resultLabel.text = "Error: Bad number format"
+            resultLabel.textColor = UIColor.red
+            resultLabel.text = "Erreur: montant mal formatté"
             return
         }
 
         if let converter = converter {
             let result = converter.convert(amount)
 
+            resultLabel.textColor = UIColor.black
             resultLabel.text = Self.resultFormatter.string(from: NSNumber(value: result))!
         }
-    }
-    
-    func reset() {
-        rateLabel.text = ""
-//        rateLabel.isHidden = true
-        amountTextField.isEnabled = false
-        amountTextField.text = ""
-        resultLabel.text = ""
     }
 
     @objc func hideKeyboard() {
         view.endEditing(true)
     }
 
-    func initHideKeyboardEvent() {
+    private func initHideKeyboardEvent() {
         let tap = UITapGestureRecognizer(
             target: self,
             action: #selector(hideKeyboard)
@@ -69,21 +82,40 @@ class ConverterViewController: UIViewController {
         view.addGestureRecognizer(tap)
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    private func setRateLoadingState(_ enabled: Bool) {
+        rateLabel.isHidden = enabled
+        rateLoadingIndicator.isHidden = !enabled
+        amountTextField.isEnabled = !enabled
+    }
 
-        initHideKeyboardEvent()
+    private func loadRatesData(completionHandler: @escaping (RatesData?) -> Void) {
+        guard !testing else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                completionHandler(RatesData.getSample())
+//                completionHandler(nil)
+            }
 
-        amountTextField.text = ""
-        resultLabel.text = ""
+            return
+        }
 
-        rateLabel.isHidden = true
-        rateLoadingIndicator.isHidden = false
-        amountTextField.isEnabled = false
+        let requestData = RatesRequestData(baseCurrency: baseCurrency, targetCurrency: targetCurrency)
+        ratesLoader.load(requestData: requestData, completionHandler: completionHandler)
+    }
 
-        converterService.getConverter(baseCurrency: "EUR", targetCurrency: "USD") { converter in
-            guard let converter = converter else {
-                print("Error: can't get converter")
+    private func setupConverter() {
+        setRateLoadingState(true)
+
+//        let requestData = RatesRequestData(baseCurrency: baseCurrency, targetCurrency: targetCurrency)
+//        ratesLoader.load(requestData: requestData) { ratesData in
+        loadRatesData() { ratesData in
+
+            guard let ratesData = ratesData,
+                  let converter = Converter(ratesData: ratesData)
+            else {
+                DispatchQueue.main.async {
+//                self.presentRateLoadingFailureAlert()
+                    self.present(self.rateLoadingFailureAlert, animated: true, completion: nil)
+                }
                 return
             }
 
@@ -91,18 +123,24 @@ class ConverterViewController: UIViewController {
 
             DispatchQueue.main.async {
                 self.rateLabel.text = String(converter.rate)
-                self.rateLabel.isHidden = false
-                self.rateLoadingIndicator.isHidden = true
-                self.amountTextField.isEnabled = true
+                self.setRateLoadingState(false)
             }
         }
-
-        // Do any additional setup after loading the view.
     }
 
-//    init() {
-//
-//    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        initHideKeyboardEvent()
+
+        resultLabel.layer.borderWidth = 1.0
+        resultLabel.layer.borderColor = UIColor(named: "Travel")!.cgColor
+
+        amountTextField.text = ""
+        resultLabel.text = ""
+
+        setupConverter()
+    }
 
     /*
      // MARK: - Navigation
