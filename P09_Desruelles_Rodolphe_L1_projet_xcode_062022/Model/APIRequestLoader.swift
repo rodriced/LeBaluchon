@@ -26,6 +26,7 @@ class APIRequestLoader<T: APIRequest> {
 
     func load(requestData: T.RequestDataType, completionHandler: @escaping (T.ResultDataType?) -> Void) {
         guard let urlRequest = try? apiRequest.makeRequest(from: requestData) else {
+            print("Error: bad request")
             return completionHandler(nil)
         }
 
@@ -35,11 +36,18 @@ class APIRequestLoader<T: APIRequest> {
                   let response = response as? HTTPURLResponse,
                   response.statusCode == 200
             else {
+                print("Loading error = \(error.debugDescription)")
+                print("Status Code = \((response as! HTTPURLResponse).statusCode)")
                 return completionHandler(nil)
             }
 
-            let parsedResponse = try? self.apiRequest.parseResponse(data: data)
-            completionHandler(parsedResponse)
+            do {
+                let parsedResponse = try self.apiRequest.parseResponse(data: data)
+                completionHandler(parsedResponse)
+            } catch {
+                print("Decoding error: \(error)")
+                completionHandler(nil)
+            }
 
         }.resume()
     }

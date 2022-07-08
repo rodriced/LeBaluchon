@@ -125,17 +125,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4di-oy-YKj">
-                                <rect key="frame" x="20" y="108" width="374" height="343"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4di-oy-YKj">
+                                <rect key="frame" x="20" y="108" width="374" height="368"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Français" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ucq-Nf-IK1">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <rect key="frame" x="150" y="0.0" width="74" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" name="Travel"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ExT-7H-ZIA">
-                                        <rect key="frame" x="0.0" y="40.5" width="374" height="100"/>
+                                        <rect key="frame" x="0.0" y="44" width="374" height="100"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="M1M-1e-yZO"/>
@@ -145,8 +145,12 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ptd-9n-Q3V">
-                                        <rect key="frame" x="0.0" y="160.5" width="374" height="22"/>
+                                        <rect key="frame" x="112" y="164" width="150" height="40"/>
                                         <color key="backgroundColor" name="AccentColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="nLq-7r-GXh"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="yaP-PK-gII"/>
+                                        </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Traduire" image="arrow.down" catalog="system"/>
@@ -155,18 +159,17 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anglais" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xN8-vi-O8e">
-                                        <rect key="frame" x="0.0" y="202.5" width="374" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <rect key="frame" x="155" y="224" width="64.5" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" name="Travel"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sW4-kX-RsP">
-                                        <rect key="frame" x="0.0" y="243" width="374" height="100"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <rect key="frame" x="0.0" y="268" width="374" height="100"/>
+                                        <color key="backgroundColor" systemColor="systemGray5Color"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="R4b-OA-8E9"/>
                                         </constraints>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -193,21 +196,155 @@
             </objects>
             <point key="canvasLocation" x="1511.5942028985507" y="303.34821428571428"/>
         </scene>
-        <!--Meteo-->
+        <!--Weather-->
         <scene sceneID="46P-iQ-QPB">
             <objects>
-                <viewController id="u2R-V8-6cd" userLabel="Meteo" sceneMemberID="viewController">
+                <viewController id="u2R-V8-6cd" userLabel="Weather" customClass="WeatherViewController" customModule="P09_Desruelles_Rodolphe_L1_projet_xcode_062022" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QbC-fD-ocW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fte-IG-GOz">
+                                <rect key="frame" x="10" y="88" width="394" height="372.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paris" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8xp-q0-Bgc">
+                                        <rect key="frame" x="169" y="0.0" width="56.5" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="Hb2-nr-ran"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="26"/>
+                                        <color key="textColor" name="Travel"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15:41" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVL-WY-q8F">
+                                        <rect key="frame" x="177" y="60" width="40" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Wnh-Ex-GDs"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="GsV-B4-ofE">
+                                        <rect key="frame" x="178.5" y="90" width="37" height="70.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="VST-Y8-LK0"/>
+                                        </constraints>
+                                    </activityIndicatorView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="01d" translatesAutoresizingMaskIntoConstraints="NO" id="F9d-9j-MWg">
+                                        <rect key="frame" x="147" y="160.5" width="100" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="1yy-bt-300"/>
+                                            <constraint firstAttribute="width" secondItem="F9d-9j-MWg" secondAttribute="height" id="RLI-aD-mZQ"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ciel dégagé" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fou-UA-Wsf">
+                                        <rect key="frame" x="153" y="260.5" width="88" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="PKM-Sm-To2"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" name="Travel"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19ºC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xw8-9O-NHw">
+                                        <rect key="frame" x="164.5" y="290.5" width="65" height="82"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pnS-Qg-3AI">
+                                <rect key="frame" x="0.0" y="460.5" width="414" height="3"/>
+                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="3" id="lV9-JN-PO6"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cU6-vm-Hqn">
+                                <rect key="frame" x="10" y="473.5" width="394" height="457.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New-York" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Kw-0E-e0M">
+                                        <rect key="frame" x="131.5" y="0.0" width="131" height="85"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                        <color key="textColor" name="Travel"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15:41" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2LL-wY-acO">
+                                        <rect key="frame" x="177" y="85" width="40" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="6hY-b8-q0I">
+                                        <rect key="frame" x="178.5" y="133" width="37" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="1Hc-7T-soS"/>
+                                        </constraints>
+                                    </activityIndicatorView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="01d" translatesAutoresizingMaskIntoConstraints="NO" id="zg4-JU-dTV">
+                                        <rect key="frame" x="147" y="233" width="100" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="zg4-JU-dTV" secondAttribute="height" id="X1k-w5-DHE"/>
+                                            <constraint firstAttribute="height" constant="100" id="ZtY-WU-f7t"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ciel dégagé" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TjG-sD-ju0">
+                                        <rect key="frame" x="153" y="333" width="88" height="48.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" name="Travel"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19ºC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WNm-jd-wTT">
+                                        <rect key="frame" x="170.5" y="381.5" width="53.5" height="76"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="cqs-Eo-PgW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pnS-Qg-3AI" firstAttribute="leading" secondItem="cqs-Eo-PgW" secondAttribute="leading" id="0l8-gk-tlV"/>
+                            <constraint firstItem="pnS-Qg-3AI" firstAttribute="top" secondItem="fte-IG-GOz" secondAttribute="bottom" id="9Vf-yy-zXk"/>
+                            <constraint firstItem="cU6-vm-Hqn" firstAttribute="top" secondItem="pnS-Qg-3AI" secondAttribute="bottom" constant="10" id="I2a-Y2-4kX"/>
+                            <constraint firstItem="cqs-Eo-PgW" firstAttribute="bottom" secondItem="fte-IG-GOz" secondAttribute="bottom" multiplier="2" constant="10" id="Iuo-NI-OS8"/>
+                            <constraint firstItem="cqs-Eo-PgW" firstAttribute="trailing" secondItem="cU6-vm-Hqn" secondAttribute="trailing" constant="10" id="KG3-6i-r7i"/>
+                            <constraint firstItem="cqs-Eo-PgW" firstAttribute="trailing" secondItem="fte-IG-GOz" secondAttribute="trailing" constant="10" id="OmA-27-ewD"/>
+                            <constraint firstItem="cU6-vm-Hqn" firstAttribute="leading" secondItem="cqs-Eo-PgW" secondAttribute="leading" constant="10" id="QAY-6o-Nv6"/>
+                            <constraint firstItem="fte-IG-GOz" firstAttribute="top" secondItem="cqs-Eo-PgW" secondAttribute="top" id="QK7-7I-Qo9"/>
+                            <constraint firstItem="cqs-Eo-PgW" firstAttribute="bottom" secondItem="cU6-vm-Hqn" secondAttribute="bottom" id="Rkv-iv-5HG"/>
+                            <constraint firstItem="cqs-Eo-PgW" firstAttribute="trailing" secondItem="pnS-Qg-3AI" secondAttribute="trailing" id="h7Z-3A-9zz"/>
+                            <constraint firstItem="fte-IG-GOz" firstAttribute="leading" secondItem="cqs-Eo-PgW" secondAttribute="leading" constant="10" id="vKc-4b-afa"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Météo" image="cloud.sun" catalog="system" id="abF-0K-Sd6"/>
+                    <navigationItem key="navigationItem" title="Weather" id="2Rj-Jh-g3d">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="g5c-9W-Y9e">
+                            <color key="tintColor" name="Travel"/>
+                            <connections>
+                                <action selector="refreshButtonTapped:" destination="u2R-V8-6cd" id="JZT-6Q-rwy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="destinationLoadingIndicator" destination="6hY-b8-q0I" id="MaP-w7-hbf"/>
+                        <outlet property="destinationTemperatureLabel" destination="WNm-jd-wTT" id="V63-Tj-wRD"/>
+                        <outlet property="destinationTimeLabel" destination="2LL-wY-acO" id="RdT-4m-Uks"/>
+                        <outlet property="destinationWeatherDescriptionLabel" destination="TjG-sD-ju0" id="3Wg-t3-KUC"/>
+                        <outlet property="destinationWeatherIcon" destination="zg4-JU-dTV" id="W3R-sR-pRW"/>
+                        <outlet property="originLoadingIndicator" destination="GsV-B4-ofE" id="xXl-lX-4UO"/>
+                        <outlet property="originTemperatureLabel" destination="Xw8-9O-NHw" id="AgS-hw-ZKk"/>
+                        <outlet property="originTimeLabel" destination="tVL-WY-q8F" id="jes-Y6-APD"/>
+                        <outlet property="originWeatherDescriptionLabel" destination="Fou-UA-Wsf" id="CzU-Eu-322"/>
+                        <outlet property="originWeatherIcon" destination="F9d-9j-MWg" id="PLL-Zj-uWO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zdQ-Em-aWW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-48" y="949"/>
+            <point key="canvasLocation" x="860.86956521739137" y="948.88392857142856"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ffL-8U-o8c">
@@ -222,7 +359,7 @@
                     <connections>
                         <segue destination="cIF-oF-KOD" kind="relationship" relationship="viewControllers" id="BR6-mG-4Ez"/>
                         <segue destination="1es-bD-hj7" kind="relationship" relationship="viewControllers" id="QKZ-oK-KYs"/>
-                        <segue destination="u2R-V8-6cd" kind="relationship" relationship="viewControllers" id="X19-kS-2ZH"/>
+                        <segue destination="a63-Bp-rJN" kind="relationship" relationship="viewControllers" id="X19-kS-2ZH"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vMr-Qn-yuc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -261,6 +398,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ppa-BH-eKp">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" name="Travel"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -271,18 +411,41 @@
             </objects>
             <point key="canvasLocation" x="601.44927536231887" y="303.34821428571428"/>
         </scene>
+        <!--Météo-->
+        <scene sceneID="mxY-0x-nNC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="a63-Bp-rJN" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Météo" image="cloud.sun" catalog="system" id="abF-0K-Sd6"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="J5t-fo-Bcg">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" name="Travel"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="u2R-V8-6cd" kind="relationship" relationship="rootViewController" id="mT9-5b-WIM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qif-Jp-FaK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-49.275362318840585" y="948.88392857142856"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="01d" width="50" height="50"/>
         <image name="arrow.down" catalog="system" width="120" height="128"/>
         <image name="cloud.sun" catalog="system" width="128" height="95"/>
         <image name="dollarsign.square" catalog="system" width="128" height="114"/>
         <image name="exclamationmark.triangle" catalog="system" width="128" height="112"/>
         <image name="text.bubble" catalog="system" width="128" height="110"/>
         <namedColor name="AccentColor">
-            <color red="0.38823529410000002" green="0.18039215689999999" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.3880000114440918" green="0.18000000715255737" blue="0.98400002717971802" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="Travel">
-            <color red="0.38823529410000002" green="0.18039215689999999" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.3880000114440918" green="0.18000000715255737" blue="0.98400002717971802" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
