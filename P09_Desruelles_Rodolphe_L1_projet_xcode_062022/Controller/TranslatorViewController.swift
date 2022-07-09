@@ -8,6 +8,8 @@
 import UIKit
 
 class TranslatorViewController: UIViewController, UITextViewDelegate {
+    var sourceTextViewPlaceholderDisplayed: Bool!
+
     // Model interface
 
     let translationLoader = APIRequestLoader(apiRequest: TranslationRequest())
@@ -32,12 +34,16 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
         updateTargetTextViewTranslation()
     }
 
+    // UITextViewDelegate (for TextView placeholder and translate button states)
+    
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         guard textView == sourceTextView else { return true }
 
         if sourceTextViewPlaceholderDisplayed {
             hideSourceTextViewPlaceholder()
         }
+        
+        updateTranslateButtonState()
 
         return true
     }
@@ -49,12 +55,28 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
             displaySourceTextViewPlaceholder()
         }
     }
-
+    
     func textViewDidChange(_ textView: UITextView) {
         guard textView == sourceTextView else { return }
 
         updateTranslateButtonState()
     }
+
+    // Keyboard management
+
+    @objc func hideKeyboard() {
+        view.endEditing(true)
+    }
+
+    private func initHideKeyboardEvent() {
+        let tap = UITapGestureRecognizer(
+            target: self,
+            action: #selector(hideKeyboard)
+        )
+        view.addGestureRecognizer(tap)
+    }
+
+    // Logic
 
     func updateTargetTextViewTranslation() {
         let translationParameters = TranslationRequestData(
@@ -62,13 +84,7 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
             sourceLanguage: "fr",
             text: sourceTextView.text ?? ""
         )
-//        do {
-//            let request = try translationLoader.apiRequest.makeRequest(from: translationParameters)
-//            print(request)
-//        } catch {
-//            print(error)
-//        }
-//        return
+
         translationLoader.load(requestData: translationParameters) {
             result in
             guard let result = result else {
@@ -83,10 +99,6 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
             }
         }
     }
-
-    // Working
-
-    var sourceTextViewPlaceholderDisplayed: Bool!
 
     func hideSourceTextViewPlaceholder() {
         sourceTextView.textColor = UIColor.darkText
@@ -104,12 +116,16 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
         translateButton.isEnabled = !sourceTextView.text.isEmpty && !sourceTextViewPlaceholderDisplayed
     }
 
-    func setupDesign() {
-        sourceTextView.layer.borderWidth = 1.0
-        sourceTextView.layer.borderColor = UIColor.black.cgColor
+    func setupInterface() {
+        sourceTextView.layer.borderWidth = 0.5
+        sourceTextView.layer.borderColor = UIColor.lightGray.cgColor
 
-        targetTextView.layer.borderWidth = 2.0
-        targetTextView.layer.borderColor = UIColor(named: "Travel")!.cgColor
+        translateButton.layer.cornerRadius = 10.0
+        translateButton.clipsToBounds = true
+        
+        translateButton.isEnabled = false
+        
+        displaySourceTextViewPlaceholder()
     }
 
     override func viewDidLoad() {
@@ -117,11 +133,9 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
 
         sourceTextView.delegate = self
         
-        setupDesign()
-        translateButton.isEnabled = false
-        displaySourceTextViewPlaceholder()
-
-        translateButton.isEnabled = !sourceTextView.text.isEmpty && !sourceTextViewPlaceholderDisplayed
+        initHideKeyboardEvent()
+        
+        setupInterface()
     }
 
     /*

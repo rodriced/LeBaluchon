@@ -10,7 +10,6 @@ import UIKit
 class TownWeatherInterface {
     var dateFormatter: DateFormatter = {
         let df = DateFormatter()
-//        df.locale = Locale(identifier: "fr_FR")
         df.dateFormat = "HH:MM"
         return df
     }()
@@ -57,6 +56,7 @@ class TownWeatherInterface {
 
 class WeatherViewController: UIViewController {
     let weatherLoader = APIRequestLoader(apiRequest: WeatherRequest())
+    var loadings = 0
         
     var originWeatherInterface: TownWeatherInterface!
     var destinationWeatherInterface: TownWeatherInterface!
@@ -74,12 +74,14 @@ class WeatherViewController: UIViewController {
         return alertVC
     }()
     
+    @IBOutlet var originTownLabel: UILabel!
     @IBOutlet var originTimeLabel: UILabel!
     @IBOutlet var originWeatherIcon: UIImageView!
     @IBOutlet var originWeatherDescriptionLabel: UILabel!
     @IBOutlet var originTemperatureLabel: UILabel!
     @IBOutlet var originLoadingIndicator: UIActivityIndicatorView!
     
+    @IBOutlet var destinationTownLabel: UILabel!
     @IBOutlet var destinationTimeLabel: UILabel!
     @IBOutlet var destinationWeatherIcon: UIImageView!
     @IBOutlet var destinationWeatherDescriptionLabel: UILabel!
@@ -93,6 +95,9 @@ class WeatherViewController: UIViewController {
 
 
     func loadTownWeather(for town: String, completionHandler: @escaping (WeatherData) -> Void) {
+        
+        loadings += 1
+//        navigationController?.navigationBar.
         
         let requestData = WeatherRequestData(town: town)!
         weatherLoader.load(requestData: requestData) { weatherData in
@@ -116,6 +121,9 @@ class WeatherViewController: UIViewController {
     }
     
     func initInterface() {
+        originTownLabel.text = "Paris"
+        destinationTownLabel.text = "New-York"
+        
         originWeatherInterface = TownWeatherInterface(
             timeLabel: originTimeLabel,
             weatherIcon: originWeatherIcon,

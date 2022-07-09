@@ -20,11 +20,19 @@ class ConverterViewController: UIViewController {
         return formatter
     }()
 
-//    let converterService = ConverterService.shared
-    let testing = true
+    enum Testing { case normal, withError }
+//    let testing = nil
+//    let testing: Testing? = .normal
+    let testing: Testing? = .withError
 
     let ratesLoader = APIRequestLoader(apiRequest: RatesRequest())
     var converter: Converter?
+
+    let rateLoadingFailureAlert: UIAlertController = {
+        let alertVC = UIAlertController(title: "Erreur", message: "Impossible de récupérer le cours.", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        return alertVC
+    }()
 
     @IBOutlet var rateLabel: UILabel!
     @IBOutlet var rateLoadingIndicator: UIActivityIndicatorView!
@@ -38,11 +46,17 @@ class ConverterViewController: UIViewController {
         updateResultLabel()
     }
 
-    let rateLoadingFailureAlert: UIAlertController = {
-        let alertVC = UIAlertController(title: "Erreur", message: "Impossible de récupérer le cours.", preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        return alertVC
-    }()
+    @objc func hideKeyboard() {
+        view.endEditing(true)
+    }
+
+    private func initHideKeyboardEvent() {
+        let tap = UITapGestureRecognizer(
+            target: self,
+            action: #selector(hideKeyboard)
+        )
+        view.addGestureRecognizer(tap)
+    }
 
 //    func presentRateLoadingFailureAlert() {
 //        let alertVC = UIAlertController(title: "Erreur", message: "Impossible de récupérer le cours.", preferredStyle: .alert)
@@ -58,7 +72,7 @@ class ConverterViewController: UIViewController {
 
         guard let amount = Double(amountText) else {
             resultLabel.textColor = UIColor.red
-            resultLabel.text = "Erreur: montant mal formatté"
+            resultLabel.text = "Erreur: caractères invalides"
             return
         }
 
@@ -70,18 +84,6 @@ class ConverterViewController: UIViewController {
         }
     }
 
-    @objc func hideKeyboard() {
-        view.endEditing(true)
-    }
-
-    private func initHideKeyboardEvent() {
-        let tap = UITapGestureRecognizer(
-            target: self,
-            action: #selector(hideKeyboard)
-        )
-        view.addGestureRecognizer(tap)
-    }
-
     private func setRateLoadingState(_ enabled: Bool) {
         rateLabel.isHidden = enabled
         rateLoadingIndicator.isHidden = !enabled
@@ -89,12 +91,13 @@ class ConverterViewController: UIViewController {
     }
 
     private func loadRatesData(completionHandler: @escaping (RatesData?) -> Void) {
-        guard !testing else {
+        if let testing = testing {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                completionHandler(RatesData.getSample())
-//                completionHandler(nil)
+                switch testing {
+                case .normal: completionHandler(RatesData.getSample())
+                case .withError: completionHandler(nil)
+                }
             }
-
             return
         }
 
@@ -132,9 +135,6 @@ class ConverterViewController: UIViewController {
         super.viewDidLoad()
 
         initHideKeyboardEvent()
-
-        resultLabel.layer.borderWidth = 1.0
-        resultLabel.layer.borderColor = UIColor(named: "Travel")!.cgColor
 
         amountTextField.text = ""
         resultLabel.text = ""
