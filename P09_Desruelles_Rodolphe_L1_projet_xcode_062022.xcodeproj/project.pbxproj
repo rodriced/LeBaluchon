@@ -28,6 +28,7 @@
 		DC18B68B28610FC900C90E88 /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18B68A28610FC900C90E88 /* Converter.swift */; };
 		DC18B68D2861250200C90E88 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18B68C2861250200C90E88 /* ViewController.swift */; };
 		DC18B68F28618FD100C90E88 /* ConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18B68E28618FD100C90E88 /* ConverterViewController.swift */; };
+		DCAA4137287B1023009E962E /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAA4136287B1023009E962E /* Helper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		DC18B68C2861250200C90E88 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DC18B68E28618FD100C90E88 /* ConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewController.swift; sourceTree = "<group>"; };
 		DC2FD5E2286AD93400143ECA /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
+		DCAA4136287B1023009E962E /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 				DC18B68E28618FD100C90E88 /* ConverterViewController.swift */,
 				DC0D98452872F55700DD3B3E /* TranslatorViewController.swift */,
 				DC0D98492874F8E400DD3B3E /* WeatherViewController.swift */,
+				DCAA4136287B1023009E962E /* Helper.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				DC0D984A2874F8E400DD3B3E /* WeatherViewController.swift in Sources */,
 				DC18B68F28618FD100C90E88 /* ConverterViewController.swift in Sources */,
 				DC0D98462872F55700DD3B3E /* TranslatorViewController.swift in Sources */,
+				DCAA4137287B1023009E962E /* Helper.swift in Sources */,
 				DC18B6572860F61600C90E88 /* AppDelegate.swift in Sources */,
 				DC0D98482873FEAA00DD3B3E /* Weather.swift in Sources */,
 				DC18B68D2861250200C90E88 /* ViewController.swift in Sources */,

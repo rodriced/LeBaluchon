@@ -20,11 +20,7 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
     @IBOutlet var targetTextView: UITextView!
     @IBOutlet var translateButton: UIButton!
 
-    let translationLoadingFailureAlert: UIAlertController = {
-        let alertVC = UIAlertController(title: "Erreur", message: "Impossible de récupérer la traduction.", preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        return alertVC
-    }()
+    let translationLoadingFailureAlert = Helper.simpleAlert(message: "Impossible de récupérer la traduction.")
 
     // Events
 

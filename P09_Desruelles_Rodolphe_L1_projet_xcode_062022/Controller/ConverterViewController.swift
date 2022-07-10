@@ -28,11 +28,7 @@ class ConverterViewController: UIViewController {
     let ratesLoader = APIRequestLoader(apiRequest: RatesRequest())
     var converter: Converter?
 
-    let rateLoadingFailureAlert: UIAlertController = {
-        let alertVC = UIAlertController(title: "Erreur", message: "Impossible de récupérer le cours.", preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        return alertVC
-    }()
+    let rateLoadingFailureAlert = Helper.simpleAlert(message: "Impossible de récupérer le cours.")
 
     @IBOutlet var rateLabel: UILabel!
     @IBOutlet var rateLoadingIndicator: UIActivityIndicatorView!
@@ -58,12 +54,6 @@ class ConverterViewController: UIViewController {
         view.addGestureRecognizer(tap)
     }
 
-//    func presentRateLoadingFailureAlert() {
-//        let alertVC = UIAlertController(title: "Erreur", message: "Impossible de récupérer le cours.", preferredStyle: .alert)
-//        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-//        present(alertVC, animated: true, completion: nil)
-//    }
-
     func updateResultLabel() {
         guard let amountText = amountTextField.text, !amountText.isEmpty else {
             resultLabel.text = ""
@@ -84,14 +74,15 @@ class ConverterViewController: UIViewController {
         }
     }
 
-    private func setRateLoadingState(_ enabled: Bool) {
-        rateLabel.isHidden = enabled
-        rateLoadingIndicator.isHidden = !enabled
-        amountTextField.isEnabled = !enabled
+    private func setRateLoadingState(_ loadingInProgress: Bool) {
+        rateLabel.isHidden = loadingInProgress
+        rateLoadingIndicator.isHidden = !loadingInProgress
+        amountTextField.isEnabled = !loadingInProgress
     }
 
     private func loadRatesData(completionHandler: @escaping (RatesData?) -> Void) {
         if let testing = testing {
+            // Simulating network delay
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 switch testing {
                 case .normal: completionHandler(RatesData.getSample())
@@ -112,19 +103,14 @@ class ConverterViewController: UIViewController {
 //        ratesLoader.load(requestData: requestData) { ratesData in
         loadRatesData() { ratesData in
 
-            guard let ratesData = ratesData,
-                  let converter = Converter(ratesData: ratesData)
-            else {
-                DispatchQueue.main.async {
-//                self.presentRateLoadingFailureAlert()
-                    self.present(self.rateLoadingFailureAlert, animated: true, completion: nil)
-                }
-                return
-            }
-
-            self.converter = converter
-
             DispatchQueue.main.async {
+                guard let ratesData = ratesData,
+                      let converter = Converter(ratesData: ratesData)
+                else {
+                    return self.present(self.rateLoadingFailureAlert, animated: true, completion: nil)
+                }
+
+                self.converter = converter
                 self.rateLabel.text = String(converter.rate)
                 self.setRateLoadingState(false)
             }
