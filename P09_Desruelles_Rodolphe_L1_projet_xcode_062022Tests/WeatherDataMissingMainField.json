@@ -1,0 +1,35 @@
+{
+  "coord": {
+    "lon": 2.32,
+    "lat": 48.8589
+  },
+  "weather": [
+    {
+      "id": 800,
+      "main": "Clear",
+      "description": "ciel dégagé",
+      "icon": "01d"
+    }
+  ],
+  "base": "stations",
+  "visibility": 10000,
+  "wind": {
+    "speed": 4.63,
+    "deg": 70
+  },
+  "clouds": {
+    "all": 0
+  },
+  "dt": 1657550317,
+  "sys": {
+    "type": 2,
+    "id": 2012208,
+    "country": "FR",
+    "sunrise": 1657511935,
+    "sunset": 1657569183
+  },
+  "timezone": 7200,
+  "id": 6545270,
+  "name": "Quartier du Palais-Royal",
+  "cod": 200
+}

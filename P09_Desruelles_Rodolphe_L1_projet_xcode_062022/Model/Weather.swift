@@ -49,26 +49,34 @@ struct WeatherRequestInputData {
     let longitude: Double
 }
 
+enum WeatherRequestError: Error {
+    case missingApiKey
+}
+
 struct WeatherRequest: APIRequest {
     static let decoder = JSONDecoder()
 
-    static let apiKey = Bundle.main.infoDictionary?["OPENWEATHER_API_KEY"] as? String
+    var apiKey: String?
+
+    init(apiKey: String? = Bundle.main.infoDictionary?["OPENWEATHER_API_KEY"] as? String) {
+        self.apiKey = apiKey
+    }
 
     func makeRequest(from inputData: WeatherRequestInputData) throws -> URLRequest {
+        guard let apiKey = apiKey else {
+            print("Error: Missing API Key")
+            throw WeatherRequestError.missingApiKey
+        }
+
         var components = URLComponents(string: "https://api.openweathermap.org/data/2.5/weather")!
 
-        var queryItems = [
+        components.queryItems = [
             URLQueryItem(name: "lat", value: String(inputData.latitude)),
             URLQueryItem(name: "lon", value: String(inputData.longitude)),
             URLQueryItem(name: "units", value: "metric"),
-            URLQueryItem(name: "lang", value: "fr")
+            URLQueryItem(name: "lang", value: "fr"),
+            URLQueryItem(name: "appid", value: apiKey)
         ]
-
-        if let apiKey = Self.apiKey {
-            queryItems.append(URLQueryItem(name: "appid", value: apiKey))
-        }
-
-        components.queryItems = queryItems
 
         let request = URLRequest(url: components.url!)
         print(request)

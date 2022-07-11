@@ -12,6 +12,14 @@ import XCTest
 
 class TestsHelper {
     
+    static func buildTestLoader<T: APIRequest>(_ apiRequest: T) -> APIRequestLoader<T> {
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [MockURLProtocol.self]
+        let urlSession = URLSession(configuration: configuration)
+
+        return APIRequestLoader(apiRequest: apiRequest, urlSession: urlSession)
+    }
+    
     static func testLoaderResultData<T: APIRequest>(
         _ loader: APIRequestLoader<T>,
         requestInputData: T.InputDataType,

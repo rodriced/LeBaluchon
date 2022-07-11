@@ -56,13 +56,13 @@ class TownWeatherInterface {
 
 struct Town {
     let name: String
-    let lattitude: Double
+    let latitude: Double
     let longitude: Double
 }
 
 class WeatherViewController: UIViewController {
-    let originTown = Town(name: "Paris", lattitude: 48.8588897, longitude: 2.3200410217200766)
-    let destinationTown = Town(name: "New-York", lattitude: 40.7127281, longitude: -74.0060152)
+    let originTown = Town(name: "Paris", latitude: 48.8588897, longitude: 2.3200410217200766)
+    let destinationTown = Town(name: "New-York", latitude: 40.7127281, longitude: -74.0060152)
     
     let weatherLoader = APIRequestLoader(apiRequest: WeatherRequest())
     var loadings = 0
@@ -103,7 +103,7 @@ class WeatherViewController: UIViewController {
         loadings += 1
 //        navigationController?.navigationBar.
         
-        let requestInputData = WeatherRequestInputData(latitude: town.lattitude, longitude: town.longitude)
+        let requestInputData = WeatherRequestInputData(latitude: town.latitude, longitude: town.longitude)
         weatherLoader.load(requestInputData: requestInputData) { weatherData in
             DispatchQueue.main.async {
                 guard let weatherData = weatherData else {
