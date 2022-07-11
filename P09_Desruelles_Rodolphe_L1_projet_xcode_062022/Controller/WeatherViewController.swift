@@ -54,7 +54,16 @@ class TownWeatherInterface {
     }
 }
 
+struct Town {
+    let name: String
+    let lattitude: Double
+    let longitude: Double
+}
+
 class WeatherViewController: UIViewController {
+    let originTown = Town(name: "Paris", lattitude: 48.8588897, longitude: 2.3200410217200766)
+    let destinationTown = Town(name: "New-York", lattitude: 40.7127281, longitude: -74.0060152)
+    
     let weatherLoader = APIRequestLoader(apiRequest: WeatherRequest())
     var loadings = 0
         
@@ -63,7 +72,6 @@ class WeatherViewController: UIViewController {
 
     var dateFormatter: DateFormatter = {
         let df = DateFormatter()
-//        df.locale = Locale(identifier: "fr_FR")
         df.dateFormat = "HH:MM"
         return df
     }()
@@ -90,13 +98,13 @@ class WeatherViewController: UIViewController {
     
 
 
-    func loadTownWeather(for town: String, completionHandler: @escaping (WeatherData) -> Void) {
+    func loadTownWeather(for town: Town, completionHandler: @escaping (WeatherData) -> Void) {
         
         loadings += 1
 //        navigationController?.navigationBar.
         
-        let requestData = WeatherRequestData(town: town)!
-        weatherLoader.load(requestData: requestData) { weatherData in
+        let requestInputData = WeatherRequestInputData(latitude: town.lattitude, longitude: town.longitude)
+        weatherLoader.load(requestInputData: requestInputData) { weatherData in
             DispatchQueue.main.async {
                 guard let weatherData = weatherData else {
                     self.present(self.weatherLoadingFailureAlert, animated: true, completion: nil)
@@ -112,13 +120,13 @@ class WeatherViewController: UIViewController {
         originWeatherInterface.clear()
         destinationWeatherInterface.clear()
         
-        loadTownWeather(for: "paris", completionHandler: originWeatherInterface.update)
-        loadTownWeather(for: "new-york", completionHandler: destinationWeatherInterface.update)
+        loadTownWeather(for: originTown, completionHandler: originWeatherInterface.update)
+        loadTownWeather(for: destinationTown, completionHandler: destinationWeatherInterface.update)
     }
     
     func initInterface() {
-        originTownLabel.text = "Paris"
-        destinationTownLabel.text = "New-York"
+        originTownLabel.text = originTown.name
+        destinationTownLabel.text = destinationTown.name
         
         originWeatherInterface = TownWeatherInterface(
             timeLabel: originTimeLabel,

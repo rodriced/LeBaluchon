@@ -31,14 +31,14 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
     }
 
     // UITextViewDelegate (for TextView placeholder and translate button states)
-    
+
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         guard textView == sourceTextView else { return true }
 
         if sourceTextViewPlaceholderDisplayed {
             hideSourceTextViewPlaceholder()
         }
-        
+
         updateTranslateButtonState()
 
         return true
@@ -51,7 +51,7 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
             displaySourceTextViewPlaceholder()
         }
     }
-    
+
     func textViewDidChange(_ textView: UITextView) {
         guard textView == sourceTextView else { return }
 
@@ -75,22 +75,19 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
     // Logic
 
     func updateTargetTextViewTranslation() {
-        let translationParameters = TranslationRequestData(
+        let requestInputData = TranslationRequestInputData(
             targetLanguage: "en",
             sourceLanguage: "fr",
             text: sourceTextView.text ?? ""
         )
 
-        translationLoader.load(requestData: translationParameters) {
+        translationLoader.load(requestInputData: requestInputData) {
             result in
-            guard let result = result else {
-                DispatchQueue.main.async {
-                    self.present(self.translationLoadingFailureAlert, animated: true, completion: nil)
-                }
-                return
-            }
-
             DispatchQueue.main.async {
+                guard let result = result else {
+                    return self.present(self.translationLoadingFailureAlert, animated: true, completion: nil)
+                }
+
                 self.targetTextView.text = result[0].translations[0].text
             }
         }
@@ -118,9 +115,9 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
 
         translateButton.layer.cornerRadius = 10.0
         translateButton.clipsToBounds = true
-        
+
         translateButton.isEnabled = false
-        
+
         displaySourceTextViewPlaceholder()
     }
 
@@ -128,9 +125,9 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
 
         sourceTextView.delegate = self
-        
+
         initHideKeyboardEvent()
-        
+
         setupInterface()
     }
 

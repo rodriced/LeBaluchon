@@ -13,28 +13,22 @@ struct RatesData: Decodable, Equatable {
     let base: String
     let date: String
     let rates: [String: Double]
-    
-    static func getSample() -> RatesData {
-        return RatesData(
-            success: true,
-            timestamp: 1656070863,
-            base: "EUR",
-            date: "2022-06-24",
-            rates: ["USD": 1.053507]
-        )
-    }
 }
 
 class InvalidRatesData: Error {}
 
-struct RatesRequestData {
+struct RatesRequestInputData {
     let baseCurrency: String
     let targetCurrencies: [String]
-    
-    init(baseCurrency: String, targetCurrency:String) {
+
+    init(baseCurrency: String, targetCurrency: String) {
         self.baseCurrency = baseCurrency
         self.targetCurrencies = [targetCurrency]
     }
+}
+
+enum RatesRequestError: Error {
+    case missingParameter
 }
 
 struct RatesRequest: APIRequest {
@@ -42,17 +36,22 @@ struct RatesRequest: APIRequest {
 
     static let apiKey = Bundle.main.infoDictionary?["FIXER_IO_API_KEY"] as? String
 
-    func makeRequest(from data: RatesRequestData) throws -> URLRequest {
+    func makeRequest(from inputData: RatesRequestInputData) throws -> URLRequest {
+        guard let apikey = Self.apiKey,
+              !inputData.baseCurrency.isEmpty,
+              !inputData.targetCurrencies.isEmpty
+        else {
+            throw RatesRequestError.missingParameter
+        }
+
         var components = URLComponents(string: "https://api.apilayer.com/fixer/latest")!
         components.queryItems = [
-            URLQueryItem(name: "base", value: data.baseCurrency),
-            URLQueryItem(name: "symbols", value: data.targetCurrencies.joined(separator: ","))
+            URLQueryItem(name: "base", value: inputData.baseCurrency),
+            URLQueryItem(name: "symbols", value: inputData.targetCurrencies.joined(separator: ","))
         ]
 
         var request = URLRequest(url: components.url!)
-        Self.apiKey.map {
-            request.addValue($0, forHTTPHeaderField: "apikey")
-        }
+        request.addValue(apikey, forHTTPHeaderField: "apikey")
 
         return request
     }
@@ -66,19 +65,18 @@ struct RatesRequest: APIRequest {
     }
 }
 
-
 class Converter {
     let baseCurrency: String
     let targetCurrency: String
 
     let rate: Double
     let rateDate: String
-    
+
     convenience init?(ratesData: RatesData) {
         guard ratesData.rates.count == 1, let (targetCurrency, rate) = ratesData.rates.first else {
             return nil
         }
-        
+
         self.init(baseCurrency: ratesData.base, targetCurrency: targetCurrency, rate: rate, rateDate: ratesData.date)
     }
 

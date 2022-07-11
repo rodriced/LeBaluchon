@@ -12,15 +12,34 @@ import XCTest
 class RatesLoaderTestCase: XCTestCase {
     var loader: APIRequestLoader<RatesRequest>!
 
-    static let fakeResponseData = FakeResponseData(resourceOK: "RatesDataOK", resourceKO: "RatesDataKO")
-    
+    static let fakeResponseData = FakeResponseData(dataResourceOK: "RatesDataOK")
+    static let responseDataWithNoSuccess = FakeResponseData.dataFromRessource("RatesDataNoSuccess")!
+    static let responseDataWithMissingField = FakeResponseData.dataFromRessource("RatesDataMissingField")!
+
+    static let ratesDataOK = RatesData(
+        success: true,
+        timestamp: 1656512403,
+        base: "EUR",
+        date: "2022-06-29",
+        rates: ["USD": 1.048361]
+    )
+
+    static let ratesDataWithNotOnlyOneRate = RatesData(
+        success: true,
+        timestamp: 1656512403,
+        base: "EUR",
+        date: "2022-06-29",
+        rates: ["USD": 1.048361,
+                "GBP": 1.12007]
+    )
+
     override func setUp() {
         let apiRequest = RatesRequest()
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [MockURLProtocol.self]
         let urlSession = URLSession(configuration: configuration)
 
-        self.loader = APIRequestLoader(apiRequest: apiRequest, urlSession: urlSession)
+        loader = APIRequestLoader(apiRequest: apiRequest, urlSession: urlSession)
     }
 
     override func tearDownWithError() throws {
@@ -28,97 +47,139 @@ class RatesLoaderTestCase: XCTestCase {
     }
 
     func testLoaderSuccess() {
-        let requestData = RatesRequestData(baseCurrency: "EUR", targetCurrency: "USD")
-        let responseData = Self.fakeResponseData.dataOK!
-        let response = Self.fakeResponseData.responseOK
-        let expectedRates =
-            RatesData(
-                success: true,
-                timestamp: 1656512403,
-                base: "EUR",
-                date: "2022-06-29",
-                rates: ["USD": 1.048361]
-            )
-        
-        MockURLProtocol.requestHandler = { request in
-            XCTAssertEqual(request.url?.query?.contains("base=EUR"), true)
-            return (response, responseData)
-        }
-        
-        let expectation = XCTestExpectation(description: "response")
-        self.loader.load(requestData: requestData) { rates in
-            XCTAssertEqual(rates, expectedRates)
-            expectation.fulfill()
-        }
+        let expectation = TestsHelper.testLoaderResultData(
+            loader,
+            requestInputData: RatesRequestInputData(baseCurrency: "EUR", targetCurrency: "USD"),
+            responseData: Self.fakeResponseData.dataOK,
+            response: Self.fakeResponseData.responseOK,
+            expectedResultData: Self.ratesDataOK
+        )
         wait(for: [expectation], timeout: 1)
     }
 
-    func testLoaderFailureWhenRatesDataIsNotValid() {
-        let requestData = RatesRequestData(baseCurrency: "EUR", targetCurrency: "USD")
-        let responseData = Self.fakeResponseData.dataKO!
-        let response = Self.fakeResponseData.responseOK
-        
-        MockURLProtocol.requestHandler = { request in
-            return (response, responseData)
-        }
-        
-        let expectation = XCTestExpectation(description: "response")
-        self.loader.load(requestData: requestData) { rates in
-            XCTAssertEqual(rates, nil)
-            expectation.fulfill()
-        }
+    func testLoaderFailureWithMissingValueInRequestInputData() {
+        let expectation = TestsHelper.testLoaderResultData(
+            loader,
+            requestInputData: RatesRequestInputData(baseCurrency: "", targetCurrency: "USD"),
+            responseData: Self.fakeResponseData.dataOK,
+            response: Self.fakeResponseData.responseOK,
+            expectedResultData: nil
+        )
         wait(for: [expectation], timeout: 1)
     }
-    
+
+    func testLoaderFailureWhenRatesDataHasNoSuccess() {
+        let expectation = TestsHelper.testLoaderResultData(
+            loader,
+            requestInputData: RatesRequestInputData(baseCurrency: "EUR", targetCurrency: "USD"),
+            responseData: Self.responseDataWithNoSuccess,
+            response: Self.fakeResponseData.responseOK,
+            expectedResultData: nil
+        )
+//        let requestInputData = RatesRequestInputData(baseCurrency: "EUR", targetCurrency: "USD")
+//        let responseData = Self.responseDataWithNoSuccess
+//        let response = Self.fakeResponseData.responseOK
+//
+//        MockURLProtocol.requestHandler = { _ in
+//            (response, responseData)
+//        }
+//
+//        let expectation = XCTestExpectation(description: "response")
+//        self.loader.load(requestInputData: requestInputData) { rates in
+//            XCTAssertEqual(rates, nil)
+//            expectation.fulfill()
+//        }
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testLoaderFailureWhenResponseDataHasMissingField() {
+        let expectation = TestsHelper.testLoaderResultData(
+            loader,
+            requestInputData: RatesRequestInputData(baseCurrency: "EUR", targetCurrency: "USD"),
+            responseData: Self.responseDataWithMissingField,
+            response: Self.fakeResponseData.responseOK,
+            expectedResultData: nil
+        )
+        wait(for: [expectation], timeout: 1)
+    }
+
     func testLoaderFailureWhenDataIsBadJson() {
-        let requestData = RatesRequestData(baseCurrency: "EUR", targetCurrency: "USD")
-        let responseData = Self.fakeResponseData.dataBadJson!
-        let response = Self.fakeResponseData.responseOK
-        
-        MockURLProtocol.requestHandler = { request in
-            return (response, responseData)
-        }
-        
-        let expectation = XCTestExpectation(description: "response")
-        self.loader.load(requestData: requestData) { rates in
-            XCTAssertEqual(rates, nil)
-            expectation.fulfill()
-        }
+        let expectation = TestsHelper.testLoaderResultData(
+            loader,
+            requestInputData: RatesRequestInputData(baseCurrency: "EUR", targetCurrency: "USD"),
+            responseData: Self.fakeResponseData.badJsondata,
+            response: Self.fakeResponseData.responseOK,
+            expectedResultData: nil
+        )
+//        let requestInputData = RatesRequestInputData(baseCurrency: "EUR", targetCurrency: "USD")
+//        let responseData = Self.fakeResponseData.badJsondata
+//        let response = Self.fakeResponseData.responseOK
+//
+//        MockURLProtocol.requestHandler = { _ in
+//            (response, responseData)
+//        }
+//
+//        let expectation = XCTestExpectation(description: "response")
+//        self.loader.load(requestInputData: requestInputData) { rates in
+//            XCTAssertEqual(rates, nil)
+//            expectation.fulfill()
+//        }
         wait(for: [expectation], timeout: 1)
     }
-    
+
     func testLoaderFailureWhenHTTPResponseStatusCodeIsNot200() {
-        let requestData = RatesRequestData(baseCurrency: "EUR", targetCurrency: "USD")
-        let responseData = Self.fakeResponseData.dataOK!
-        let response = Self.fakeResponseData.responseKO
-
-        MockURLProtocol.requestHandler = { request in
-            return (response, responseData)
-        }
-        
-        let expectation = XCTestExpectation(description: "response")
-        self.loader.load(requestData: requestData) { rates in
-            XCTAssertEqual(rates, nil)
-            expectation.fulfill()
-        }
+        let expectation = TestsHelper.testLoaderResultData(
+            loader,
+            requestInputData: RatesRequestInputData(baseCurrency: "EUR", targetCurrency: "USD"),
+            responseData: Self.fakeResponseData.dataOK,
+            response: Self.fakeResponseData.responseKO,
+            expectedResultData: nil
+        )
+//        let requestInputData = RatesRequestInputData(baseCurrency: "EUR", targetCurrency: "USD")
+//        let responseData = Self.fakeResponseData.dataOK
+//        let response = Self.fakeResponseData.responseKO
+//
+//        MockURLProtocol.requestHandler = { _ in
+//            (response, responseData)
+//        }
+//
+//        let expectation = XCTestExpectation(description: "response")
+//        self.loader.load(requestInputData: requestInputData) { rates in
+//            XCTAssertEqual(rates, nil)
+//            expectation.fulfill()
+//        }
         wait(for: [expectation], timeout: 1)
     }
 
-    class FakeError: Error {}
-    
     func testLoaderFailureWhenErrorIsThrownDuringLoading() {
-        let requestData = RatesRequestData(baseCurrency: "EUR", targetCurrency: "USD")
-
-        MockURLProtocol.requestHandler = { request in
-            throw FakeError()
-        }
-        
-        let expectation = XCTestExpectation(description: "response")
-        self.loader.load(requestData: requestData) { rates in
-            XCTAssertEqual(rates, nil)
-            expectation.fulfill()
-        }
+        let expectation = TestsHelper.testLoaderFailureWhenErrorIsThrownDuringLoading(
+            loader,
+            requestInputData: RatesRequestInputData(baseCurrency: "EUR", targetCurrency: "USD"),
+            thrownError: FakeResponseData.error
+        )
+//        let requestInputData = RatesRequestInputData(baseCurrency: "EUR", targetCurrency: "USD")
+//
+//        MockURLProtocol.requestHandler = { _ in
+//            throw FakeError()
+//        }
+//
+//        let expectation = XCTestExpectation(description: "response")
+//        self.loader.load(requestInputData: requestInputData) { rates in
+//            XCTAssertEqual(rates, nil)
+//            expectation.fulfill()
+//        }
         wait(for: [expectation], timeout: 1)
     }
 
+    func testConverter() {
+        let converter = Converter(ratesData: Self.ratesDataOK)!
+
+        XCTAssertEqual(converter.convert(1.5), 1.5725415000000003)
+    }
+
+    func testConverterInitializationFailure() {
+        let converter = Converter(ratesData: Self.ratesDataWithNotOnlyOneRate)
+
+        XCTAssertNil(converter)
+    }
 }

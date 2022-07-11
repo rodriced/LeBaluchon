@@ -85,15 +85,23 @@ class ConverterViewController: UIViewController {
             // Simulating network delay
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 switch testing {
-                case .normal: completionHandler(RatesData.getSample())
+                case .normal:
+                    let sampleRatesData = RatesData(
+                        success: true,
+                        timestamp: 1656512403,
+                        base: "EUR",
+                        date: "2022-06-29",
+                        rates: ["USD": 1.048361]
+                    )
+                    completionHandler(sampleRatesData)
                 case .withError: completionHandler(nil)
                 }
             }
             return
         }
 
-        let requestData = RatesRequestData(baseCurrency: baseCurrency, targetCurrency: targetCurrency)
-        ratesLoader.load(requestData: requestData, completionHandler: completionHandler)
+        let requestInputData = RatesRequestInputData(baseCurrency: baseCurrency, targetCurrency: targetCurrency)
+        ratesLoader.load(requestInputData: requestInputData, completionHandler: completionHandler)
     }
 
     private func setupConverter() {

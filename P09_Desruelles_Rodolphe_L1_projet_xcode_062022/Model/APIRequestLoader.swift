@@ -8,10 +8,10 @@
 import Foundation
 
 protocol APIRequest {
-    associatedtype RequestDataType
-    associatedtype ResultDataType
+    associatedtype InputDataType
+    associatedtype ResultDataType: Equatable
 
-    func makeRequest(from data: RequestDataType) throws -> URLRequest
+    func makeRequest(from inputData: InputDataType) throws -> URLRequest
     func parseResponse(data: Data) throws -> ResultDataType
 }
 
@@ -24,20 +24,24 @@ class APIRequestLoader<T: APIRequest> {
         self.urlSession = urlSession
     }
 
-    func load(requestData: T.RequestDataType, completionHandler: @escaping (T.ResultDataType?) -> Void) {
-        guard let urlRequest = try? apiRequest.makeRequest(from: requestData) else {
+    func load(requestInputData: T.InputDataType, completionHandler: @escaping (T.ResultDataType?) -> Void) {
+        guard let urlRequest = try? apiRequest.makeRequest(from: requestInputData) else {
             print("Error: bad request")
             return completionHandler(nil)
         }
 
         urlSession.dataTask(with: urlRequest) { data, response, error in
+            guard error == nil
+            else {
+                print("Loading error = \(error.debugDescription)")
+                return completionHandler(nil)
+            }
+
             guard let data = data,
-                  error == nil,
                   let response = response as? HTTPURLResponse,
                   response.statusCode == 200
             else {
-                print("Loading error = \(error.debugDescription)")
-                print("Status Code = \((response as! HTTPURLResponse).statusCode)")
+                print("Status Code = \(String(describing: (response as? HTTPURLResponse)?.statusCode))")
                 return completionHandler(nil)
             }
 
