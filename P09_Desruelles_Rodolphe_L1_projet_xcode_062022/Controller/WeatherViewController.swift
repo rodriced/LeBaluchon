@@ -76,7 +76,7 @@ class WeatherViewController: UIViewController {
         return df
     }()
     
-    let weatherLoadingFailureAlert = Helper.simpleAlert(message: "Impossible de récupérer les données de météo.")
+    let weatherLoadingFailureAlert = ControllerHelper.simpleAlert(message: "Impossible de récupérer les données de météo.")
     
     @IBOutlet var originTownLabel: UILabel!
     @IBOutlet var originTimeLabel: UILabel!

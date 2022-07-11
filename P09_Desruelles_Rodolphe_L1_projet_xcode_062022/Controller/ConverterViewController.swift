@@ -28,7 +28,7 @@ class ConverterViewController: UIViewController {
     let ratesLoader = APIRequestLoader(apiRequest: RatesRequest())
     var converter: Converter?
 
-    let rateLoadingFailureAlert = Helper.simpleAlert(message: "Impossible de récupérer le cours.")
+    let rateLoadingFailureAlert = ControllerHelper.simpleAlert(message: "Impossible de récupérer le cours.")
 
     @IBOutlet var rateLabel: UILabel!
     @IBOutlet var rateLoadingIndicator: UIActivityIndicatorView!

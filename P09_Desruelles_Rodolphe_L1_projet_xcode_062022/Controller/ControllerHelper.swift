@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Helper {
+class ControllerHelper {
     static func simpleAlert(message: String) -> UIAlertController {
         let alertVC = UIAlertController(title: "Erreur", message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))

@@ -2,7 +2,7 @@
 //  TranslatorViewController.swift
 //  P09_Desruelles_Rodolphe_L1_projet_xcode_062022
 //
-//  Created by Rod on 04/07/2022.
+//  Created by Rodolphe Desruelles on 04/07/2022.
 //
 
 import UIKit
@@ -20,7 +20,7 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
     @IBOutlet var targetTextView: UITextView!
     @IBOutlet var translateButton: UIButton!
 
-    let translationLoadingFailureAlert = Helper.simpleAlert(message: "Impossible de récupérer la traduction.")
+    let translationLoadingFailureAlert = ControllerHelper.simpleAlert(message: "Impossible de récupérer la traduction.")
 
     // Events
 
