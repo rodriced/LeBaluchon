@@ -11,7 +11,7 @@
 		DC0D9836286C9A7400DD3B3E /* FakeResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0D9835286C9A7400DD3B3E /* FakeResponseData.swift */; };
 		DC0D983C286F992800DD3B3E /* APIRequestLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0D983B286F992800DD3B3E /* APIRequestLoader.swift */; };
 		DC0D983E286F9AD200DD3B3E /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0D983D286F9AD200DD3B3E /* MockURLProtocol.swift */; };
-		DC0D98402871622800DD3B3E /* RatesLoaderTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0D983F2871622800DD3B3E /* RatesLoaderTestCase.swift */; };
+		DC0D98402871622800DD3B3E /* ConverterTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0D983F2871622800DD3B3E /* ConverterTestCase.swift */; };
 		DC0D98422871BAA800DD3B3E /* RatesDataMissingField.json in Resources */ = {isa = PBXBuildFile; fileRef = DC0D98412871BAA800DD3B3E /* RatesDataMissingField.json */; };
 		DC0D98442871FCC300DD3B3E /* Translator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0D98432871FCC300DD3B3E /* Translator.swift */; };
 		DC0D98462872F55700DD3B3E /* TranslatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0D98452872F55700DD3B3E /* TranslatorViewController.swift */; };
@@ -22,13 +22,15 @@
 		DC18B65E2860F61600C90E88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC18B65C2860F61600C90E88 /* Main.storyboard */; };
 		DC18B6602860F61A00C90E88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC18B65F2860F61A00C90E88 /* Assets.xcassets */; };
 		DC18B6632860F61A00C90E88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC18B6612860F61A00C90E88 /* LaunchScreen.storyboard */; };
-		DC18B66E2860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18B66D2860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests.swift */; };
 		DC18B68B28610FC900C90E88 /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18B68A28610FC900C90E88 /* Converter.swift */; };
 		DC18B68D2861250200C90E88 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18B68C2861250200C90E88 /* ViewController.swift */; };
 		DC18B68F28618FD100C90E88 /* ConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18B68E28618FD100C90E88 /* ConverterViewController.swift */; };
-		DCAA4137287B1023009E962E /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAA4136287B1023009E962E /* Helper.swift */; };
+		DCAA4137287B1023009E962E /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAA4136287B1023009E962E /* ControllerHelper.swift */; };
 		DCAA4139287B828F009E962E /* RatesDataNoSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = DCAA4138287B828F009E962E /* RatesDataNoSuccess.json */; };
 		DCAA413B287C2414009E962E /* TestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAA413A287C2414009E962E /* TestsHelper.swift */; };
+		DCAA413D287C58ED009E962E /* TranslationDataOK.json in Resources */ = {isa = PBXBuildFile; fileRef = DCAA413C287C58ED009E962E /* TranslationDataOK.json */; };
+		DCAA4141287C5B51009E962E /* TranslatorTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAA4140287C5B51009E962E /* TranslatorTestCase.swift */; };
+		DCAA4143287C63BB009E962E /* TranslationDataMissingField.json in Resources */ = {isa = PBXBuildFile; fileRef = DCAA4142287C63BB009E962E /* TranslationDataMissingField.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +48,7 @@
 		DC0D9835286C9A7400DD3B3E /* FakeResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResponseData.swift; sourceTree = "<group>"; };
 		DC0D983B286F992800DD3B3E /* APIRequestLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestLoader.swift; sourceTree = "<group>"; };
 		DC0D983D286F9AD200DD3B3E /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
-		DC0D983F2871622800DD3B3E /* RatesLoaderTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesLoaderTestCase.swift; sourceTree = "<group>"; };
+		DC0D983F2871622800DD3B3E /* ConverterTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterTestCase.swift; sourceTree = "<group>"; };
 		DC0D98412871BAA800DD3B3E /* RatesDataMissingField.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RatesDataMissingField.json; sourceTree = "<group>"; };
 		DC0D98432871FCC300DD3B3E /* Translator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translator.swift; sourceTree = "<group>"; };
 		DC0D98452872F55700DD3B3E /* TranslatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorViewController.swift; sourceTree = "<group>"; };
@@ -60,14 +62,16 @@
 		DC18B6622860F61A00C90E88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC18B6642860F61A00C90E88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "P09_Desruelles_Rodolphe_L1_projet_xcode_062022/Supporting Files/Info.plist"; sourceTree = SOURCE_ROOT; };
 		DC18B6692860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC18B66D2860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests.swift; sourceTree = "<group>"; };
 		DC18B68A28610FC900C90E88 /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 		DC18B68C2861250200C90E88 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DC18B68E28618FD100C90E88 /* ConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewController.swift; sourceTree = "<group>"; };
 		DC2FD5E2286AD93400143ECA /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
-		DCAA4136287B1023009E962E /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		DCAA4136287B1023009E962E /* ControllerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerHelper.swift; sourceTree = "<group>"; };
 		DCAA4138287B828F009E962E /* RatesDataNoSuccess.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RatesDataNoSuccess.json; sourceTree = "<group>"; };
 		DCAA413A287C2414009E962E /* TestsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsHelper.swift; sourceTree = "<group>"; };
+		DCAA413C287C58ED009E962E /* TranslationDataOK.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TranslationDataOK.json; sourceTree = "<group>"; };
+		DCAA4140287C5B51009E962E /* TranslatorTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslatorTestCase.swift; sourceTree = "<group>"; };
+		DCAA4142287C63BB009E962E /* TranslationDataMissingField.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TranslationDataMissingField.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,13 +124,15 @@
 		DC18B66C2860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests */ = {
 			isa = PBXGroup;
 			children = (
-				DC18B66D2860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests.swift */,
 				DC0D9831286C97D400DD3B3E /* RatesDataOK.json */,
+				DCAA413C287C58ED009E962E /* TranslationDataOK.json */,
+				DCAA4142287C63BB009E962E /* TranslationDataMissingField.json */,
 				DCAA4138287B828F009E962E /* RatesDataNoSuccess.json */,
 				DC0D98412871BAA800DD3B3E /* RatesDataMissingField.json */,
 				DC0D9835286C9A7400DD3B3E /* FakeResponseData.swift */,
 				DC0D983D286F9AD200DD3B3E /* MockURLProtocol.swift */,
-				DC0D983F2871622800DD3B3E /* RatesLoaderTestCase.swift */,
+				DC0D983F2871622800DD3B3E /* ConverterTestCase.swift */,
+				DCAA4140287C5B51009E962E /* TranslatorTestCase.swift */,
 				DCAA413A287C2414009E962E /* TestsHelper.swift */,
 			);
 			path = P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests;
@@ -147,7 +153,7 @@
 				DC18B68E28618FD100C90E88 /* ConverterViewController.swift */,
 				DC0D98452872F55700DD3B3E /* TranslatorViewController.swift */,
 				DC0D98492874F8E400DD3B3E /* WeatherViewController.swift */,
-				DCAA4136287B1023009E962E /* Helper.swift */,
+				DCAA4136287B1023009E962E /* ControllerHelper.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -268,6 +274,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC0D9832286C97D400DD3B3E /* RatesDataOK.json in Resources */,
+				DCAA413D287C58ED009E962E /* TranslationDataOK.json in Resources */,
+				DCAA4143287C63BB009E962E /* TranslationDataMissingField.json in Resources */,
 				DC0D98422871BAA800DD3B3E /* RatesDataMissingField.json in Resources */,
 				DCAA4139287B828F009E962E /* RatesDataNoSuccess.json in Resources */,
 			);
@@ -284,7 +292,7 @@
 				DC0D984A2874F8E400DD3B3E /* WeatherViewController.swift in Sources */,
 				DC18B68F28618FD100C90E88 /* ConverterViewController.swift in Sources */,
 				DC0D98462872F55700DD3B3E /* TranslatorViewController.swift in Sources */,
-				DCAA4137287B1023009E962E /* Helper.swift in Sources */,
+				DCAA4137287B1023009E962E /* ControllerHelper.swift in Sources */,
 				DC18B6572860F61600C90E88 /* AppDelegate.swift in Sources */,
 				DC0D98482873FEAA00DD3B3E /* Weather.swift in Sources */,
 				DC18B68D2861250200C90E88 /* ViewController.swift in Sources */,
@@ -298,9 +306,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC0D98402871622800DD3B3E /* RatesLoaderTestCase.swift in Sources */,
+				DC0D98402871622800DD3B3E /* ConverterTestCase.swift in Sources */,
 				DCAA413B287C2414009E962E /* TestsHelper.swift in Sources */,
-				DC18B66E2860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests.swift in Sources */,
+				DCAA4141287C5B51009E962E /* TranslatorTestCase.swift in Sources */,
 				DC0D983E286F9AD200DD3B3E /* MockURLProtocol.swift in Sources */,
 				DC0D9836286C9A7400DD3B3E /* FakeResponseData.swift in Sources */,
 			);

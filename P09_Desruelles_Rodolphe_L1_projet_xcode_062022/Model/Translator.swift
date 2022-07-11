@@ -24,6 +24,10 @@ struct TranslationRequestInputData {
     let text: String
 }
 
+enum TranslationRequestError: Error {
+    case missingParameter
+}
+
 struct TranslationRequest: APIRequest {
     static let decoder = JSONDecoder()
 
@@ -31,6 +35,14 @@ struct TranslationRequest: APIRequest {
     static let subscriptionRegion = Bundle.main.infoDictionary?["MICROSOFT_TRANSLATOR_SUBSCRIPTION_REGION"] as? String
 
     func makeRequest(from inputData: TranslationRequestInputData) throws -> URLRequest {
+        guard let subscriptionKey = Self.subscriptionKey,
+              let subscriptionRegion = Self.subscriptionRegion,
+              !inputData.sourceLanguage.isEmpty,
+              !inputData.targetLanguage.isEmpty
+        else {
+            throw TranslationRequestError.missingParameter
+        }
+
         var components = URLComponents(string: "https://api.cognitive.microsofttranslator.com/")!
         components.path = "/translate"
         components.queryItems = [
@@ -46,12 +58,8 @@ struct TranslationRequest: APIRequest {
         var request = URLRequest(url: components.url!)
         request.httpBody = jsonTexts
 
-        Self.subscriptionKey.map {
-            request.addValue($0, forHTTPHeaderField: "Ocp-Apim-Subscription-Key")
-        }
-        Self.subscriptionRegion.map {
-            request.addValue($0, forHTTPHeaderField: "Ocp-Apim-Subscription-Region")
-        }
+        request.addValue(subscriptionKey, forHTTPHeaderField: "Ocp-Apim-Subscription-Key")
+        request.addValue(subscriptionRegion, forHTTPHeaderField: "Ocp-Apim-Subscription-Region")
         request.addValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-type")
         request.addValue(String(jsonTexts.count), forHTTPHeaderField: "Content-length")
         request.httpMethod = "POST"

@@ -2,7 +2,7 @@
 //  FakeResponseData.swift
 //  P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests
 //
-//  Created by Rod on 29/06/2022.
+//  Created by Rodolphe Desruelles on 29/06/2022.
 //
 
 import Foundation
