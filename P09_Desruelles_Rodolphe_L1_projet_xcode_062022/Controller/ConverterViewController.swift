@@ -8,6 +8,8 @@
 import UIKit
 
 class ConverterViewController: UIViewController {
+    let testing = true
+
     let baseCurrency = "EUR"
     let targetCurrency = "USD"
 
@@ -20,13 +22,14 @@ class ConverterViewController: UIViewController {
         return formatter
     }()
 
-    enum Testing { case normal, withError }
-//    let testing = nil
-//    let testing: Testing? = .normal
-    let testing: Testing? = .withError
+    // Model //
+    // ------//
 
     let ratesLoader = APIRequestLoader(apiRequest: RatesRequest())
     var converter: Converter?
+
+    // View components //
+    // -----------------//
 
     let rateLoadingFailureAlert = ControllerHelper.simpleAlert(message: "Impossible de récupérer le cours.")
 
@@ -35,15 +38,19 @@ class ConverterViewController: UIViewController {
     @IBOutlet var rateErrorImage: UIImageView!
 
     @IBOutlet var amountTextField: UITextField!
-
     @IBOutlet var resultLabel: UILabel!
 
+    @IBOutlet var refreshButton: UIBarButtonItem!
+
+    // Events //
+    //--------//
+    
     @IBAction func amountTextFieldDidChange(_ sender: UITextField) {
         updateResultLabel()
     }
 
-    @objc func hideKeyboard() {
-        view.endEditing(true)
+    @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem) {
+        setupConverter()
     }
 
     private func initHideKeyboardEvent() {
@@ -52,6 +59,13 @@ class ConverterViewController: UIViewController {
             action: #selector(hideKeyboard)
         )
         view.addGestureRecognizer(tap)
+    }
+
+    // Logic //
+    //-------//
+    
+    @objc func hideKeyboard() {
+        view.endEditing(true)
     }
 
     func updateResultLabel() {
@@ -74,27 +88,34 @@ class ConverterViewController: UIViewController {
         }
     }
 
-    private func setRateLoadingState(_ loadingInProgress: Bool) {
-        rateLabel.isHidden = loadingInProgress
-        rateLoadingIndicator.isHidden = !loadingInProgress
-        amountTextField.isEnabled = !loadingInProgress
+    enum RateFieldState {
+        case loaded, loadingInProgress, error
+    }
+
+    private func setRateLoadingState(_ state: RateFieldState) {
+        rateLabel.isHidden = state != .loaded
+        rateLoadingIndicator.isHidden = state != .loadingInProgress
+        amountTextField.isEnabled = state == .loaded
+        rateErrorImage.isHidden = state != .error
+        refreshButton.isEnabled = state != .loadingInProgress
     }
 
     private func loadRatesData(completionHandler: @escaping (RatesData?) -> Void) {
-        if let testing = testing {
-            // Simulating network delay
+        if testing {
+            // For testing purpose //
+            // Simulating network delay and set random rate or error
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                switch testing {
-                case .normal:
+                if Int.random(in: 1 ... 10) <= 7 {
                     let sampleRatesData = RatesData(
                         success: true,
                         timestamp: 1656512403,
                         base: "EUR",
                         date: "2022-06-29",
-                        rates: ["USD": 1.048361]
+                        rates: ["USD": Double.random(in: 1.013 ..< 1.4)]
                     )
                     completionHandler(sampleRatesData)
-                case .withError: completionHandler(nil)
+                } else {
+                    completionHandler(nil)
                 }
             }
             return
@@ -105,7 +126,7 @@ class ConverterViewController: UIViewController {
     }
 
     private func setupConverter() {
-        setRateLoadingState(true)
+        setRateLoadingState(.loadingInProgress)
 
 //        let requestData = RatesRequestData(baseCurrency: baseCurrency, targetCurrency: targetCurrency)
 //        ratesLoader.load(requestData: requestData) { ratesData in
@@ -115,12 +136,15 @@ class ConverterViewController: UIViewController {
                 guard let ratesData = ratesData,
                       let converter = Converter(ratesData: ratesData)
                 else {
-                    return self.present(self.rateLoadingFailureAlert, animated: true, completion: nil)
+                    self.setRateLoadingState(.error)
+                    self.present(self.rateLoadingFailureAlert, animated: true, completion: nil)
+                    return
                 }
 
                 self.converter = converter
                 self.rateLabel.text = String(converter.rate)
-                self.setRateLoadingState(false)
+                self.setRateLoadingState(.loaded)
+                self.updateResultLabel()
             }
         }
     }
@@ -130,6 +154,7 @@ class ConverterViewController: UIViewController {
 
         initHideKeyboardEvent()
 
+        rateErrorImage.isHidden = true
         amountTextField.text = ""
         resultLabel.text = ""
 

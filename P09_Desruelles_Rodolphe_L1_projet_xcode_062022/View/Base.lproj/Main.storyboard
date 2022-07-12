@@ -106,12 +106,20 @@
                             <constraint firstItem="FtP-U3-yde" firstAttribute="top" secondItem="Bbf-cj-MpO" secondAttribute="top" constant="20" id="yu8-0J-2af"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Convertisseur" id="9Uy-O4-PnA"/>
+                    <navigationItem key="navigationItem" title="Convertisseur" id="9Uy-O4-PnA">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="KKP-F8-vsw">
+                            <color key="tintColor" name="Travel"/>
+                            <connections>
+                                <action selector="refreshButtonTapped:" destination="d3Z-25-jUD" id="Seg-zQ-Qj7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="amountTextField" destination="CvT-ga-wuQ" id="BJu-PA-m7E"/>
                         <outlet property="rateErrorImage" destination="0xu-B4-0e3" id="R4p-Uk-hIk"/>
                         <outlet property="rateLabel" destination="3oY-E2-X7l" id="Ubc-TQ-qIl"/>
                         <outlet property="rateLoadingIndicator" destination="WAp-xv-rmn" id="eaV-fr-M8K"/>
+                        <outlet property="refreshButton" destination="KKP-F8-vsw" id="H5u-77-w0B"/>
                         <outlet property="resultLabel" destination="fdQ-BS-xJ1" id="36E-Ev-fU8"/>
                     </connections>
                 </viewController>
