@@ -7,27 +7,45 @@
 
 import UIKit
 
+struct Language {
+    let name: String
+    let symbol: String
+}
+
 class TranslatorViewController: UIViewController, UITextViewDelegate {
     var sourceTextViewPlaceholderDisplayed: Bool!
+    let placeHolderText = "Tapez un texte"
 
-    // Model interface
+    var sourceLanguage = Language(name: "Français", symbol: "fr")
+    var targetLanguage = Language(name: "Anglais", symbol: "en")
+
+    // Model interface //
 
     let translationLoader = APIRequestLoader(apiRequest: TranslationRequest())
 
-    // Components
+    // View Components //
 
+    @IBOutlet var sourceLanguageLabel: UILabel!
+    @IBOutlet var targetLanguageLabel: UILabel!
+    
     @IBOutlet var sourceTextView: UITextView!
     @IBOutlet var targetTextView: UITextView!
+    
     @IBOutlet var translateButton: UIButton!
 
     let translationLoadingFailureAlert = ControllerHelper.simpleAlert(message: "Impossible de récupérer la traduction.")
 
-    // Events
+    // Events //
 
     @IBAction func translateButtonTapped() {
+        print("translateButtonTapped")
         guard !sourceTextView.text.isEmpty, !sourceTextViewPlaceholderDisplayed else { return }
 
         updateTargetTextViewTranslation()
+    }
+
+    @IBAction func languageSwitchButton(_ sender: UIButton) {
+        switchLanguages()
     }
 
     // UITextViewDelegate (for TextView placeholder and translate button states)
@@ -55,6 +73,10 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         guard textView == sourceTextView else { return }
 
+        if sourceTextViewPlaceholderDisplayed {
+            hideSourceTextViewPlaceholder()
+        }
+        
         updateTranslateButtonState()
     }
 
@@ -72,21 +94,34 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
         view.addGestureRecognizer(tap)
     }
 
-    // Logic
+    // Logic //
+
+    func switchLanguages() {
+        (sourceLanguage, targetLanguage) = (targetLanguage, sourceLanguage)
+        initInterface()
+    }
 
     func updateTargetTextViewTranslation() {
+        translateButton.isEnabled = false
+        
         let requestInputData = TranslationRequestInputData(
-            targetLanguage: "en",
-            sourceLanguage: "fr",
+            targetLanguage: targetLanguage.symbol,
+            sourceLanguage: sourceLanguage.symbol,
             text: sourceTextView.text ?? ""
         )
+
+//        print("Load - \(requestInputData)")
 
         translationLoader.load(requestInputData: requestInputData) {
             result in
             DispatchQueue.main.async {
+                self.translateButton.isEnabled = true
+
                 guard let result = result else {
                     return self.present(self.translationLoadingFailureAlert, animated: true, completion: nil)
                 }
+
+//                print("Load Result- \(result)")
 
                 self.targetTextView.text = result[0].translations[0].text
             }
@@ -95,30 +130,38 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
 
     func hideSourceTextViewPlaceholder() {
         sourceTextView.textColor = UIColor.darkText
-        sourceTextView.text = ""
+        sourceTextView.text.removeFirst(placeHolderText.count)
         sourceTextViewPlaceholderDisplayed = false
     }
 
     func displaySourceTextViewPlaceholder() {
         sourceTextViewPlaceholderDisplayed = true
         sourceTextView.textColor = UIColor.lightGray
-        sourceTextView.text = "Tapez un texte"
+        sourceTextView.text = placeHolderText
     }
 
     func updateTranslateButtonState() {
         translateButton.isEnabled = !sourceTextView.text.isEmpty && !sourceTextViewPlaceholderDisplayed
+        
+//        print("Translate button enabled = \(translateButton.isEnabled)")
     }
 
-    func setupInterface() {
+    func setupDesign() {
         sourceTextView.layer.borderWidth = 0.5
         sourceTextView.layer.borderColor = UIColor.lightGray.cgColor
 
         translateButton.layer.cornerRadius = 10.0
         translateButton.clipsToBounds = true
+    }
 
+    func initInterface() {
         translateButton.isEnabled = false
 
         displaySourceTextViewPlaceholder()
+        targetTextView.text = ""
+
+        sourceLanguageLabel.text = sourceLanguage.name
+        targetLanguageLabel.text = targetLanguage.name
     }
 
     override func viewDidLoad() {
@@ -128,7 +171,9 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
 
         initHideKeyboardEvent()
 
-        setupInterface()
+        setupDesign()
+
+        initInterface()
     }
 
     /*

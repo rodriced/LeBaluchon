@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -19,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="FtP-U3-yde">
-                                <rect key="frame" x="20" y="108" width="374" height="279"/>
+                                <rect key="frame" x="20" y="108" width="374" height="324"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€ -&gt; $" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azf-1Y-0lb">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="30"/>
@@ -28,7 +29,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tVB-Du-iB1">
-                                        <rect key="frame" x="0.0" y="72" width="374" height="50.5"/>
+                                        <rect key="frame" x="0.0" y="72" width="374" height="80.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cours €/$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fps-LK-F1Z" userLabel="Taux €/$ :">
                                                 <rect key="frame" x="149.5" y="0.0" width="75" height="20.5"/>
@@ -45,14 +46,14 @@
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="WAp-xv-rmn">
                                                 <rect key="frame" x="177" y="30.5" width="20" height="20"/>
                                             </activityIndicatorView>
-                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exclamationmark.triangle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="0xu-B4-0e3" userLabel="Rate Error Image">
-                                                <rect key="frame" x="177" y="49.5" width="20.5" height="2"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exclamationmark.triangle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="0xu-B4-0e3" userLabel="Rate Error Image">
+                                                <rect key="frame" x="177" y="61.5" width="20.5" height="18"/>
                                                 <color key="tintColor" systemColor="systemRedColor"/>
                                             </imageView>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kAV-xv-IAY">
-                                        <rect key="frame" x="0.0" y="162.5" width="374" height="34"/>
+                                        <rect key="frame" x="0.0" y="192.5" width="374" height="34"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uX2-Zs-ovN">
                                                 <rect key="frame" x="0.0" y="0.0" width="13.5" height="34"/>
@@ -72,7 +73,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="glP-CT-LCJ">
-                                        <rect key="frame" x="0.0" y="245" width="374" height="34"/>
+                                        <rect key="frame" x="0.0" y="290" width="374" height="34"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x03-tr-vsQ">
                                                 <rect key="frame" x="0.0" y="0.0" width="13.5" height="34"/>
@@ -127,9 +128,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4di-oy-YKj">
-                                <rect key="frame" x="20" y="108" width="374" height="530.5"/>
+                                <rect key="frame" x="20" y="108" width="374" height="540.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Français" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ucq-Nf-IK1">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Français" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ucq-Nf-IK1" userLabel="Source Language Label">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" name="Travel"/>
@@ -142,28 +143,55 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ptd-9n-Q3V">
-                                        <rect key="frame" x="0.0" y="281.5" width="374" height="40"/>
-                                        <color key="backgroundColor" name="AccentColor"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dyG-GZ-hMk">
+                                        <rect key="frame" x="0.0" y="281.5" width="374" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ptd-9n-Q3V">
+                                                <rect key="frame" x="112" y="5" width="150" height="40"/>
+                                                <color key="backgroundColor" name="AccentColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="nLq-7r-GXh"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="yaP-PK-gII"/>
+                                                </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Traduire" image="arrow.down" catalog="system"/>
+                                                <connections>
+                                                    <action selector="translateButtonTapped" destination="PXg-xH-kem" eventType="touchUpInside" id="VNQ-wS-O3S"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQG-9V-vAO" userLabel="Switch Button">
+                                                <rect key="frame" x="20" y="12.5" width="31" height="25.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <color key="tintColor" name="Travel"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title=" ">
+                                                    <imageReference key="image" image="arrow.up.arrow.down.square.fill" catalog="system" symbolScale="large"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="black"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="languageSwitchButton:" destination="PXg-xH-kem" eventType="touchUpInside" id="R7r-fv-3Mv"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="nLq-7r-GXh"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="yaP-PK-gII"/>
+                                            <constraint firstItem="Ptd-9n-Q3V" firstAttribute="centerX" secondItem="dyG-GZ-hMk" secondAttribute="centerX" id="9j5-wr-45O"/>
+                                            <constraint firstItem="dQG-9V-vAO" firstAttribute="leading" secondItem="dyG-GZ-hMk" secondAttribute="leading" constant="20" id="GLa-jJ-oBy"/>
+                                            <constraint firstItem="Ptd-9n-Q3V" firstAttribute="centerY" secondItem="dyG-GZ-hMk" secondAttribute="centerY" id="GWj-BS-oA2"/>
+                                            <constraint firstItem="Ptd-9n-Q3V" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dQG-9V-vAO" secondAttribute="trailing" constant="8" symbolic="YES" id="TpV-YL-Xfx"/>
+                                            <constraint firstItem="dQG-9V-vAO" firstAttribute="centerY" secondItem="dyG-GZ-hMk" secondAttribute="centerY" id="ajw-kQ-aFO"/>
+                                            <constraint firstAttribute="height" constant="50" id="twn-Di-DOI"/>
                                         </constraints>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Traduire" image="arrow.down" catalog="system"/>
-                                        <connections>
-                                            <action selector="translateButtonTapped" destination="PXg-xH-kem" eventType="touchUpInside" id="j8a-gg-uuw"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anglais" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xN8-vi-O8e">
-                                        <rect key="frame" x="0.0" y="341.5" width="374" height="24"/>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anglais" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xN8-vi-O8e" userLabel="Target Language Label">
+                                        <rect key="frame" x="0.0" y="351.5" width="374" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" name="Travel"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sW4-kX-RsP">
-                                        <rect key="frame" x="0.0" y="385.5" width="374" height="145"/>
+                                        <rect key="frame" x="0.0" y="395.5" width="374" height="145"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -184,9 +212,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Traduction" id="wKC-YW-Vkt"/>
                     <connections>
+                        <outlet property="sourceLanguageLabel" destination="ucq-Nf-IK1" id="eVH-W3-1Gy"/>
                         <outlet property="sourceTextView" destination="ExT-7H-ZIA" id="HeW-jm-Ru1"/>
+                        <outlet property="targetLanguageLabel" destination="xN8-vi-O8e" id="c6h-QY-Hl3"/>
                         <outlet property="targetTextView" destination="sW4-kX-RsP" id="kMf-TT-7rL"/>
-                        <outlet property="translateButton" destination="Ptd-9n-Q3V" id="05a-C3-MFe"/>
+                        <outlet property="translateButton" destination="Ptd-9n-Q3V" id="JbS-WH-4gb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BDN-Bz-8gh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -445,6 +475,7 @@
     <resources>
         <image name="01d" width="50" height="50"/>
         <image name="arrow.down" catalog="system" width="120" height="128"/>
+        <image name="arrow.up.arrow.down.square.fill" catalog="system" width="128" height="114"/>
         <image name="cloud.sun" catalog="system" width="128" height="95"/>
         <image name="dollarsign.square" catalog="system" width="128" height="114"/>
         <image name="exclamationmark.triangle" catalog="system" width="128" height="112"/>
