@@ -7,6 +7,8 @@
 
 import UIKit
 
+// Class for the weather of one town
+
 class TownWeatherInterface {
     var dateFormatter: DateFormatter = {
         let df = DateFormatter()
@@ -54,11 +56,15 @@ class TownWeatherInterface {
     }
 }
 
+// Town data
+
 struct Town {
     let name: String
     let latitude: Double
     let longitude: Double
 }
+
+// Controller
 
 class WeatherViewController: UIViewController {
     var dateFormatter: DateFormatter = {
@@ -68,12 +74,12 @@ class WeatherViewController: UIViewController {
     }()
     
     // Model //
-    //-------//
+    // -------//
     
     let weatherLoader = APIRequestLoader(apiRequest: WeatherRequest())
 
     // Interface state //
-    //-----------------//
+    // -----------------//
     
     let originTown = Town(name: "Paris", latitude: 48.8588897, longitude: 2.3200410217200766)
     let destinationTown = Town(name: "New-York", latitude: 40.7127281, longitude: -74.0060152)
@@ -81,10 +87,8 @@ class WeatherViewController: UIViewController {
     var originWeatherInterface: TownWeatherInterface!
     var destinationWeatherInterface: TownWeatherInterface!
     
-    var loadings = 0
-
     // View components //
-    //-----------------//
+    // -----------------//
 
     let weatherLoadingFailureAlert = ControllerHelper.simpleAlert(message: "Impossible de récupérer les données de météo.")
     
@@ -102,20 +106,47 @@ class WeatherViewController: UIViewController {
     @IBOutlet var destinationTemperatureLabel: UILabel!
     @IBOutlet var destinationLoadingIndicator: UIActivityIndicatorView!
     
+    @IBOutlet var refreshButton: UIBarButtonItem!
+    
     // Events //
-    //--------//
+    // --------//
     
     @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem) {
         loadWeather()
     }
     
     // Logic //
-    //-------//
+    // -------//
 
+    // Loading state
+    
+    var loadings = 0
+    
+    func initLoadings() {
+        refreshButton.isEnabled = false
+        loadings = 2
+    }
+    
+    func loadingEnded() {
+        loadings -= 1
+        if loadings == 0 {
+            refreshButton.isEnabled = true
+        }
+    }
+    
+    // Weather loading
+    
+    func loadWeather() {
+        initLoadings()
+        
+        originWeatherInterface.clear()
+        destinationWeatherInterface.clear()
+        
+        loadTownWeather(for: originTown, completionHandler: originWeatherInterface.update)
+        loadTownWeather(for: destinationTown, completionHandler: destinationWeatherInterface.update)
+    }
+    
     func loadTownWeather(for town: Town, completionHandler: @escaping (WeatherData) -> Void) {
-        
-        loadings += 1
-        
         let requestInputData = WeatherRequestInputData(latitude: town.latitude, longitude: town.longitude)
         weatherLoader.load(requestInputData) { weatherData in
             DispatchQueue.main.async {
@@ -125,17 +156,13 @@ class WeatherViewController: UIViewController {
                 }
 
                 completionHandler(weatherData)
+                
+                self.loadingEnded()
             }
         }
     }
     
-    func loadWeather() {
-        originWeatherInterface.clear()
-        destinationWeatherInterface.clear()
-        
-        loadTownWeather(for: originTown, completionHandler: originWeatherInterface.update)
-        loadTownWeather(for: destinationTown, completionHandler: destinationWeatherInterface.update)
-    }
+    // Init
     
     func initInterface() {
         originTownLabel.text = originTown.name

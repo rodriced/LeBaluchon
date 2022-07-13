@@ -386,6 +386,7 @@
                         <outlet property="originTownLabel" destination="8xp-q0-Bgc" id="tsW-R9-Ufd"/>
                         <outlet property="originWeatherDescriptionLabel" destination="Fou-UA-Wsf" id="CzU-Eu-322"/>
                         <outlet property="originWeatherIcon" destination="F9d-9j-MWg" id="PLL-Zj-uWO"/>
+                        <outlet property="refreshButton" destination="g5c-9W-Y9e" id="cv3-Qo-mxG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zdQ-Em-aWW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

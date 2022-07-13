@@ -67,6 +67,7 @@
 		DC18B68A28610FC900C90E88 /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 		DC18B68E28618FD100C90E88 /* ConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewController.swift; sourceTree = "<group>"; };
 		DC2FD5E2286AD93400143ECA /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
+		DC64F7D0287F8A8700A22BB1 /* Secret_template.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret_template.xcconfig; sourceTree = "<group>"; };
 		DCAA4136287B1023009E962E /* ControllerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerHelper.swift; sourceTree = "<group>"; };
 		DCAA4138287B828F009E962E /* RatesDataNoSuccess.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RatesDataNoSuccess.json; sourceTree = "<group>"; };
 		DCAA413A287C2414009E962E /* TestsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsHelper.swift; sourceTree = "<group>"; };
@@ -184,6 +185,7 @@
 				DC18B6612860F61A00C90E88 /* LaunchScreen.storyboard */,
 				DC18B6642860F61A00C90E88 /* Info.plist */,
 				DC2FD5E2286AD93400143ECA /* Secret.xcconfig */,
+				DC64F7D0287F8A8700A22BB1 /* Secret_template.xcconfig */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
