@@ -10,16 +10,12 @@
 import XCTest
 
 class TranslatorTestCase: XCTestCase {
-    var loader: APIRequestLoader<TranslationRequest>!
-
+    // Data for tests
+    
     static let fakeResponseData = FakeResponseData(dataResourceOK: "TranslationDataOK")
 
     static let responseDataWithMissingField = FakeResponseData.dataFromRessource("RatesDataMissingField")!
-    static let requestResultDataOK = [
-        TranslationDataTranslations(translations: [
-            TranslationDataTranslation(to: "en", text: "Hello how are you doing?")
-        ])
-    ]
+    static let requestResultDataOK = "Hello how are you doing?"
 
     static let requestInputDataOK = TranslationRequestInputData(
         targetLanguage: "en",
@@ -33,17 +29,12 @@ class TranslatorTestCase: XCTestCase {
         text: "Bonjour, comment allez-vous ?"
     )
 
-    override func setUp() {
-        let apiRequest = TranslationRequest()
-        let configuration = URLSessionConfiguration.ephemeral
-        configuration.protocolClasses = [MockURLProtocol.self]
-        let urlSession = URLSession(configuration: configuration)
-
-        loader = APIRequestLoader(apiRequest: apiRequest, urlSession: urlSession)
-    }
+     // Loader tests
 
     func testTranslationLoaderSuccess() {
-        let expectation = TestsHelper.testLoaderResultData(
+        let loader = TestsHelper.buildTestLoader(TranslationRequest())
+
+        let expectation = TestsHelper.testLoaderExpectedResultData(
             loader,
             requestInputData: Self.requestInputDataOK,
             responseData: Self.fakeResponseData.dataOK,
@@ -53,8 +44,24 @@ class TranslatorTestCase: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
-    func testTranslationLoaderFailureWithMissingValueInRequestInputData() {
-        let expectation = TestsHelper.testLoaderResultData(
+    func testTranslationLoaderFailureWhenMissingApiKey() {
+        let apiRequest = TranslationRequest(subscriptionKey: nil)
+        let loader = TestsHelper.buildTestLoader(apiRequest)
+
+        let expectation = TestsHelper.testLoaderExpectedResultData(
+            loader,
+            requestInputData: Self.requestInputDataOK,
+            responseData: Self.fakeResponseData.dataOK,
+            response: Self.fakeResponseData.responseOK,
+            expectedResultData: nil
+        )
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testTranslationLoaderFailureWhenInputParameterHasMissingValue() {
+        let loader = TestsHelper.buildTestLoader(TranslationRequest())
+        
+        let expectation = TestsHelper.testLoaderExpectedResultData(
             loader,
             requestInputData: Self.requestInputDataWithMissingValue,
             responseData: Self.fakeResponseData.dataOK,
@@ -65,7 +72,9 @@ class TranslatorTestCase: XCTestCase {
     }
 
    func testTranslationLoaderFailureWhenResponseDataHasMissingField() {
-        let expectation = TestsHelper.testLoaderResultData(
+       let loader = TestsHelper.buildTestLoader(TranslationRequest())
+
+       let expectation = TestsHelper.testLoaderExpectedResultData(
             loader,
             requestInputData: Self.requestInputDataOK,
             responseData: Self.responseDataWithMissingField,
@@ -76,7 +85,9 @@ class TranslatorTestCase: XCTestCase {
     }
 
     func testTranslationLoaderFailureWhenDataIsBadJson() {
-        let expectation = TestsHelper.testLoaderResultData(
+        let loader = TestsHelper.buildTestLoader(TranslationRequest())
+        
+        let expectation = TestsHelper.testLoaderExpectedResultData(
             loader,
             requestInputData: Self.requestInputDataOK,
             responseData: Self.fakeResponseData.badJsondata,
@@ -87,7 +98,9 @@ class TranslatorTestCase: XCTestCase {
     }
 
     func testTranslationLoaderFailureWhenHTTPResponseStatusCodeIsNot200() {
-        let expectation = TestsHelper.testLoaderResultData(
+        let loader = TestsHelper.buildTestLoader(TranslationRequest())
+        
+        let expectation = TestsHelper.testLoaderExpectedResultData(
             loader,
             requestInputData: Self.requestInputDataOK,
             responseData: Self.fakeResponseData.dataOK,
@@ -98,7 +111,9 @@ class TranslatorTestCase: XCTestCase {
     }
 
     func testTranslationLoaderFailureWhenErrorIsThrownDuringLoading() {
-        let expectation = TestsHelper.testLoaderFailureWhenErrorIsThrownDuringLoading(
+        let loader = TestsHelper.buildTestLoader(TranslationRequest())
+
+        let expectation = TestsHelper.testLoaderExpectedFailureWhenErrorIsThrownDuringLoading(
             loader,
             requestInputData: Self.requestInputDataOK,
             thrownError: FakeResponseData.error

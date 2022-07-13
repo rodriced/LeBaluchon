@@ -7,16 +7,22 @@
 
 import Foundation
 
-struct TranslationDataTranslation: Decodable, Equatable {
+// API Request result data
+
+struct TranslationDataElement: Decodable, Equatable {
     let to: String
     let text: String
 }
 
-struct TranslationDataTranslations: Decodable, Equatable {
-    let translations: [TranslationDataTranslation]
+struct TranslationDataElements: Decodable, Equatable {
+    let translations: [TranslationDataElement]
 }
 
-typealias TranslationData = [TranslationDataTranslations]
+typealias TranslationData = [TranslationDataElements]
+
+typealias TranslationRequestResultData = String
+
+// API Request input Data
 
 struct TranslationRequestInputData {
     let targetLanguage: String
@@ -24,20 +30,33 @@ struct TranslationRequestInputData {
     let text: String
 }
 
+// API Request
+
 enum TranslationRequestError: Error {
+    case missingApiKey
     case missingParameter
 }
 
 struct TranslationRequest: APIRequest {
     static let decoder = JSONDecoder()
 
-    static let subscriptionKey = Bundle.main.infoDictionary?["MICROSOFT_TRANSLATOR_SUBSCRIPTION_KEY"] as? String
-    static let subscriptionRegion = Bundle.main.infoDictionary?["MICROSOFT_TRANSLATOR_SUBSCRIPTION_REGION"] as? String
-
+    var subscriptionKey: String?
+    var subscriptionRegion: String?
+    
+    init(subscriptionKey: String? = Bundle.main.infoDictionary?["MICROSOFT_TRANSLATOR_SUBSCRIPTION_KEY"] as? String
+         , subscriptionRegion: String? = Bundle.main.infoDictionary?["MICROSOFT_TRANSLATOR_SUBSCRIPTION_REGION"] as? String) {
+        self.subscriptionKey = subscriptionKey
+        self.subscriptionRegion = subscriptionRegion
+    }
+    
     func makeRequest(from inputData: TranslationRequestInputData) throws -> URLRequest {
-        guard let subscriptionKey = Self.subscriptionKey,
-              let subscriptionRegion = Self.subscriptionRegion,
-              !inputData.sourceLanguage.isEmpty,
+        guard let subscriptionKey = subscriptionKey,
+              let subscriptionRegion = subscriptionRegion
+        else {
+            throw TranslationRequestError.missingApiKey
+        }
+
+        guard !inputData.sourceLanguage.isEmpty,
               !inputData.targetLanguage.isEmpty
         else {
             throw TranslationRequestError.missingParameter
@@ -50,7 +69,6 @@ struct TranslationRequest: APIRequest {
             URLQueryItem(name: "to", value: inputData.targetLanguage),
             URLQueryItem(name: "api-version", value: "3.0"),
             URLQueryItem(name: "textType", value: "plain"),
-//            URLQueryItem(name: "model", value: "nmt"),
         ]
 
         let jsonTexts = try JSONEncoder().encode([["Text": inputData.text]])
@@ -72,7 +90,8 @@ struct TranslationRequest: APIRequest {
         return request
     }
 
-    func parseResponse(data: Data) throws -> TranslationData {
-        return try Self.decoder.decode(TranslationData.self, from: data)
+    func parseResponse(data: Data) throws -> TranslationRequestResultData {
+        let translationData = try Self.decoder.decode(TranslationData.self, from: data)
+        return translationData[0].translations[0].text
     }
 }

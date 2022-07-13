@@ -16,15 +16,15 @@ protocol APIRequest {
 }
 
 class APIRequestLoader<T: APIRequest> {
-    let apiRequest: T
-    let urlSession: URLSession
+    private let apiRequest: T
+    private let urlSession: URLSession
 
     init(apiRequest: T, urlSession: URLSession = .shared) {
         self.apiRequest = apiRequest
         self.urlSession = urlSession
     }
 
-    func load(requestInputData: T.InputDataType, completionHandler: @escaping (T.ResultDataType?) -> Void) {
+    public func load(_ requestInputData: T.InputDataType, completionHandler: @escaping (T.ResultDataType?) -> Void) {
         guard let urlRequest = try? apiRequest.makeRequest(from: requestInputData) else {
             print("Error: bad request")
             return completionHandler(nil)

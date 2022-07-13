@@ -7,6 +7,8 @@
 
 import Foundation
 
+// API Request result data
+
 struct RatesData: Decodable, Equatable {
     let success: Bool
     let timestamp: Int
@@ -15,7 +17,7 @@ struct RatesData: Decodable, Equatable {
     let rates: [String: Double]
 }
 
-class InvalidRatesData: Error {}
+// API Request input data
 
 struct RatesRequestInputData {
     let baseCurrency: String
@@ -27,19 +29,31 @@ struct RatesRequestInputData {
     }
 }
 
+// API Request
+
 enum RatesRequestError: Error {
+    case missingApiKey
     case missingParameter
+    case invalidRatesData
 }
 
 struct RatesRequest: APIRequest {
     static let decoder = JSONDecoder()
 
-    static let apiKey = Bundle.main.infoDictionary?["FIXER_IO_API_KEY"] as? String
+    private var apiKey: String?
+
+    init(apiKey: String? = Bundle.main.infoDictionary?["FIXER_IO_API_KEY"] as? String) {
+        self.apiKey = apiKey
+    }
 
     func makeRequest(from inputData: RatesRequestInputData) throws -> URLRequest {
-        guard let apikey = Self.apiKey,
-              !inputData.baseCurrency.isEmpty,
-              !inputData.targetCurrencies.isEmpty
+        guard let apikey = apiKey else {
+            throw RatesRequestError.missingApiKey
+        }
+
+        guard
+            !inputData.baseCurrency.isEmpty,
+            !inputData.targetCurrencies.isEmpty
         else {
             throw RatesRequestError.missingParameter
         }
@@ -59,11 +73,13 @@ struct RatesRequest: APIRequest {
     func parseResponse(data: Data) throws -> RatesData {
         let ratesData = try Self.decoder.decode(RatesData.self, from: data)
         if !ratesData.success {
-            throw InvalidRatesData()
+            throw RatesRequestError.invalidRatesData
         }
         return ratesData
     }
 }
+
+// Converter
 
 class Converter {
     let baseCurrency: String

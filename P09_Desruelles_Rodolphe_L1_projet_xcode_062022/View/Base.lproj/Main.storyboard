@@ -392,10 +392,10 @@
             </objects>
             <point key="canvasLocation" x="860.86956521739137" y="948.88392857142856"/>
         </scene>
-        <!--View Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="ffL-8U-o8c">
             <objects>
-                <tabBarController id="sdf-iL-GrJ" customClass="ViewController" customModule="P09_Desruelles_Rodolphe_L1_projet_xcode_062022" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="sdf-iL-GrJ" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="T40-hL-yWX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

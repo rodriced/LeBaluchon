@@ -61,21 +61,31 @@ struct Town {
 }
 
 class WeatherViewController: UIViewController {
-    let originTown = Town(name: "Paris", latitude: 48.8588897, longitude: 2.3200410217200766)
-    let destinationTown = Town(name: "New-York", latitude: 40.7127281, longitude: -74.0060152)
-    
-    let weatherLoader = APIRequestLoader(apiRequest: WeatherRequest())
-    var loadings = 0
-        
-    var originWeatherInterface: TownWeatherInterface!
-    var destinationWeatherInterface: TownWeatherInterface!
-
     var dateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.dateFormat = "HH:MM"
         return df
     }()
     
+    // Model //
+    //-------//
+    
+    let weatherLoader = APIRequestLoader(apiRequest: WeatherRequest())
+
+    // Interface state //
+    //-----------------//
+    
+    let originTown = Town(name: "Paris", latitude: 48.8588897, longitude: 2.3200410217200766)
+    let destinationTown = Town(name: "New-York", latitude: 40.7127281, longitude: -74.0060152)
+            
+    var originWeatherInterface: TownWeatherInterface!
+    var destinationWeatherInterface: TownWeatherInterface!
+    
+    var loadings = 0
+
+    // View components //
+    //-----------------//
+
     let weatherLoadingFailureAlert = ControllerHelper.simpleAlert(message: "Impossible de récupérer les données de météo.")
     
     @IBOutlet var originTownLabel: UILabel!
@@ -92,19 +102,22 @@ class WeatherViewController: UIViewController {
     @IBOutlet var destinationTemperatureLabel: UILabel!
     @IBOutlet var destinationLoadingIndicator: UIActivityIndicatorView!
     
+    // Events //
+    //--------//
+    
     @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem) {
         loadWeather()
     }
     
-
+    // Logic //
+    //-------//
 
     func loadTownWeather(for town: Town, completionHandler: @escaping (WeatherData) -> Void) {
         
         loadings += 1
-//        navigationController?.navigationBar.
         
         let requestInputData = WeatherRequestInputData(latitude: town.latitude, longitude: town.longitude)
-        weatherLoader.load(requestInputData: requestInputData) { weatherData in
+        weatherLoader.load(requestInputData) { weatherData in
             DispatchQueue.main.async {
                 guard let weatherData = weatherData else {
                     self.present(self.weatherLoadingFailureAlert, animated: true, completion: nil)

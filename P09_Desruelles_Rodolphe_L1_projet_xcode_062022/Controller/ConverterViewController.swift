@@ -53,10 +53,10 @@ class ConverterViewController: UIViewController {
         setupConverter()
     }
 
-    private func initHideKeyboardEvent() {
+    private func initGestureForLeavingEditMode() {
         let tap = UITapGestureRecognizer(
             target: self,
-            action: #selector(hideKeyboard)
+            action: #selector(leaveEditMode)
         )
         view.addGestureRecognizer(tap)
     }
@@ -64,7 +64,7 @@ class ConverterViewController: UIViewController {
     // Logic //
     //-------//
     
-    @objc func hideKeyboard() {
+    @objc func leaveEditMode() {
         view.endEditing(true)
     }
 
@@ -76,7 +76,7 @@ class ConverterViewController: UIViewController {
 
         guard let amount = Double(amountText) else {
             resultLabel.textColor = UIColor.red
-            resultLabel.text = "Erreur: caractères invalides"
+            resultLabel.text = "Caractères invalides !"
             return
         }
 
@@ -102,8 +102,8 @@ class ConverterViewController: UIViewController {
 
     private func loadRatesData(completionHandler: @escaping (RatesData?) -> Void) {
         if testing {
-            // For testing purpose //
             // Simulating network delay and set random rate or error
+            // For testing purpose only !!
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 if Int.random(in: 1 ... 10) <= 7 {
                     let sampleRatesData = RatesData(
@@ -122,7 +122,7 @@ class ConverterViewController: UIViewController {
         }
 
         let requestInputData = RatesRequestInputData(baseCurrency: baseCurrency, targetCurrency: targetCurrency)
-        ratesLoader.load(requestInputData: requestInputData, completionHandler: completionHandler)
+        ratesLoader.load(requestInputData, completionHandler: completionHandler)
     }
 
     private func setupConverter() {
@@ -152,7 +152,7 @@ class ConverterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initHideKeyboardEvent()
+        initGestureForLeavingEditMode()
 
         rateErrorImage.isHidden = true
         amountTextField.text = ""

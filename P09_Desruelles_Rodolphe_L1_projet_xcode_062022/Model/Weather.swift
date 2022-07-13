@@ -7,6 +7,8 @@
 
 import Foundation
 
+// API Request Result Data
+
 struct WeatherDataElement: Equatable, Decodable {
     let description: String
     let icon: String
@@ -42,12 +44,14 @@ extension WeatherData: Decodable {
     }
 }
 
-class InvalidWeatherData: Error {}
+// API Request input data
 
 struct WeatherRequestInputData {
     let latitude: Double
     let longitude: Double
 }
+
+// API Request
 
 enum WeatherRequestError: Error {
     case missingApiKey

@@ -10,7 +10,7 @@
 import XCTest
 
 class WeatherTestCase: XCTestCase {
-    var loader: APIRequestLoader<WeatherRequest>!
+    // Data for tests
 
     static let fakeResponseData = FakeResponseData(dataResourceOK: "WeatherDataOK")
 
@@ -27,12 +27,12 @@ class WeatherTestCase: XCTestCase {
         longitude: 2.3200410217200766
     )
 
-    override func setUp() {
-        loader = TestsHelper.buildTestLoader(WeatherRequest())
-    }
+    // WeatherLoader tests
 
     func testWeatherLoaderSuccess() {
-        let expectation = TestsHelper.testLoaderResultData(
+        let loader = TestsHelper.buildTestLoader(WeatherRequest())
+
+        let expectation = TestsHelper.testLoaderExpectedResultData(
             loader,
             requestInputData: Self.requestInputDataOK,
             responseData: Self.fakeResponseData.dataOK,
@@ -42,12 +42,11 @@ class WeatherTestCase: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
-   func testWeatherLoaderFailureWithMissingApiKey() {
-        //Overriding common initialized loader
+    func testWeatherLoaderFailureWhenMissingApiKey() {
         let apiRequest = WeatherRequest(apiKey: nil)
-        loader = TestsHelper.buildTestLoader(apiRequest)
+        let loader = TestsHelper.buildTestLoader(apiRequest)
 
-        let expectation = TestsHelper.testLoaderResultData(
+        let expectation = TestsHelper.testLoaderExpectedResultData(
             loader,
             requestInputData: Self.requestInputDataOK,
             responseData: Self.fakeResponseData.dataOK,
@@ -58,7 +57,9 @@ class WeatherTestCase: XCTestCase {
     }
 
     func testWeatherLoaderFailureWhenResponseDataHasMissingField() {
-        let expectation = TestsHelper.testLoaderResultData(
+        let loader = TestsHelper.buildTestLoader(WeatherRequest())
+
+        let expectation = TestsHelper.testLoaderExpectedResultData(
             loader,
             requestInputData: Self.requestInputDataOK,
             responseData: Self.responseDataWithMissingMainField,
@@ -69,7 +70,9 @@ class WeatherTestCase: XCTestCase {
     }
 
     func testWeatherLoaderFailureWhenDataIsBadJson() {
-        let expectation = TestsHelper.testLoaderResultData(
+        let loader = TestsHelper.buildTestLoader(WeatherRequest())
+
+        let expectation = TestsHelper.testLoaderExpectedResultData(
             loader,
             requestInputData: Self.requestInputDataOK,
             responseData: Self.fakeResponseData.badJsondata,
@@ -80,7 +83,9 @@ class WeatherTestCase: XCTestCase {
     }
 
     func testWeatherLoaderFailureWhenHTTPResponseStatusCodeIsNot200() {
-        let expectation = TestsHelper.testLoaderResultData(
+        let loader = TestsHelper.buildTestLoader(WeatherRequest())
+
+        let expectation = TestsHelper.testLoaderExpectedResultData(
             loader,
             requestInputData: Self.requestInputDataOK,
             responseData: Self.fakeResponseData.dataOK,
@@ -91,7 +96,9 @@ class WeatherTestCase: XCTestCase {
     }
 
     func testWeatherLoaderFailureWhenErrorIsThrownDuringLoading() {
-        let expectation = TestsHelper.testLoaderFailureWhenErrorIsThrownDuringLoading(
+        let loader = TestsHelper.buildTestLoader(WeatherRequest())
+
+        let expectation = TestsHelper.testLoaderExpectedFailureWhenErrorIsThrownDuringLoading(
             loader,
             requestInputData: Self.requestInputDataOK,
             thrownError: FakeResponseData.error
@@ -99,4 +106,3 @@ class WeatherTestCase: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 }
-

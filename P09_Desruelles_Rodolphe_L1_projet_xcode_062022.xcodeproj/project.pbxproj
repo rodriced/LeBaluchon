@@ -23,7 +23,6 @@
 		DC18B6602860F61A00C90E88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC18B65F2860F61A00C90E88 /* Assets.xcassets */; };
 		DC18B6632860F61A00C90E88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC18B6612860F61A00C90E88 /* LaunchScreen.storyboard */; };
 		DC18B68B28610FC900C90E88 /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18B68A28610FC900C90E88 /* Converter.swift */; };
-		DC18B68D2861250200C90E88 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18B68C2861250200C90E88 /* ViewController.swift */; };
 		DC18B68F28618FD100C90E88 /* ConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18B68E28618FD100C90E88 /* ConverterViewController.swift */; };
 		DCAA4137287B1023009E962E /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAA4136287B1023009E962E /* ControllerHelper.swift */; };
 		DCAA4139287B828F009E962E /* RatesDataNoSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = DCAA4138287B828F009E962E /* RatesDataNoSuccess.json */; };
@@ -66,7 +65,6 @@
 		DC18B6642860F61A00C90E88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "P09_Desruelles_Rodolphe_L1_projet_xcode_062022/Supporting Files/Info.plist"; sourceTree = SOURCE_ROOT; };
 		DC18B6692860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC18B68A28610FC900C90E88 /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
-		DC18B68C2861250200C90E88 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DC18B68E28618FD100C90E88 /* ConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewController.swift; sourceTree = "<group>"; };
 		DC2FD5E2286AD93400143ECA /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
 		DCAA4136287B1023009E962E /* ControllerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerHelper.swift; sourceTree = "<group>"; };
@@ -158,11 +156,10 @@
 		DC18B6872860F8BE00C90E88 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				DC18B68C2861250200C90E88 /* ViewController.swift */,
+				DCAA4136287B1023009E962E /* ControllerHelper.swift */,
 				DC18B68E28618FD100C90E88 /* ConverterViewController.swift */,
 				DC0D98452872F55700DD3B3E /* TranslatorViewController.swift */,
 				DC0D98492874F8E400DD3B3E /* WeatherViewController.swift */,
-				DCAA4136287B1023009E962E /* ControllerHelper.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -170,10 +167,10 @@
 		DC18B6882860F8F800C90E88 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DC18B68A28610FC900C90E88 /* Converter.swift */,
-				DC0D98472873FEAA00DD3B3E /* Weather.swift */,
 				DC0D983B286F992800DD3B3E /* APIRequestLoader.swift */,
+				DC18B68A28610FC900C90E88 /* Converter.swift */,
 				DC0D98432871FCC300DD3B3E /* Translator.swift */,
+				DC0D98472873FEAA00DD3B3E /* Weather.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -306,7 +303,6 @@
 				DCAA4137287B1023009E962E /* ControllerHelper.swift in Sources */,
 				DC18B6572860F61600C90E88 /* AppDelegate.swift in Sources */,
 				DC0D98482873FEAA00DD3B3E /* Weather.swift in Sources */,
-				DC18B68D2861250200C90E88 /* ViewController.swift in Sources */,
 				DC0D983C286F992800DD3B3E /* APIRequestLoader.swift in Sources */,
 				DC18B6592860F61600C90E88 /* SceneDelegate.swift in Sources */,
 				DC0D98442871FCC300DD3B3E /* Translator.swift in Sources */,

@@ -10,7 +10,7 @@
 import XCTest
 
 class ConverterTestCase: XCTestCase {
-    var loader: APIRequestLoader<RatesRequest>!
+    // Data for tests
 
     static let fakeResponseData = FakeResponseData(dataResourceOK: "RatesDataOK")
     static let responseDataWithNoSuccess = FakeResponseData.dataFromRessource("RatesDataNoSuccess")!
@@ -32,25 +32,16 @@ class ConverterTestCase: XCTestCase {
         rates: ["USD": 1.048361,
                 "GBP": 1.12007]
     )
-    
+
     static let requestInputDataOK = RatesRequestInputData(baseCurrency: "EUR", targetCurrency: "USD")
     static let requestInputDataWithMissingValue = RatesRequestInputData(baseCurrency: "", targetCurrency: "USD")
 
-    override func setUp() {
-        let apiRequest = RatesRequest()
-        let configuration = URLSessionConfiguration.ephemeral
-        configuration.protocolClasses = [MockURLProtocol.self]
-        let urlSession = URLSession(configuration: configuration)
-
-        loader = APIRequestLoader(apiRequest: apiRequest, urlSession: urlSession)
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    // RatesLoader tests
 
     func testRatesLoaderSuccess() {
-        let expectation = TestsHelper.testLoaderResultData(
+        let loader = TestsHelper.buildTestLoader(RatesRequest())
+
+        let expectation = TestsHelper.testLoaderExpectedResultData(
             loader,
             requestInputData: Self.requestInputDataOK,
             responseData: Self.fakeResponseData.dataOK,
@@ -60,8 +51,24 @@ class ConverterTestCase: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
-    func testRatesLoaderFailureWithMissingValueInRequestInputData() {
-        let expectation = TestsHelper.testLoaderResultData(
+    func testWeatherLoaderFailureWhenMissingApiKey() {
+        let apiRequest = RatesRequest(apiKey: nil)
+        let loader = TestsHelper.buildTestLoader(apiRequest)
+
+        let expectation = TestsHelper.testLoaderExpectedResultData(
+            loader,
+            requestInputData: Self.requestInputDataOK,
+            responseData: Self.fakeResponseData.dataOK,
+            response: Self.fakeResponseData.responseOK,
+            expectedResultData: nil
+        )
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testRatesLoaderFailureWhenInputParameterHasMissingValue() {
+        let loader = TestsHelper.buildTestLoader(RatesRequest())
+
+        let expectation = TestsHelper.testLoaderExpectedResultData(
             loader,
             requestInputData: Self.requestInputDataWithMissingValue,
             responseData: Self.fakeResponseData.dataOK,
@@ -72,7 +79,9 @@ class ConverterTestCase: XCTestCase {
     }
 
     func testRatesLoaderFailureWhenRatesDataHasNoSuccess() {
-        let expectation = TestsHelper.testLoaderResultData(
+        let loader = TestsHelper.buildTestLoader(RatesRequest())
+
+        let expectation = TestsHelper.testLoaderExpectedResultData(
             loader,
             requestInputData: Self.requestInputDataOK,
             responseData: Self.responseDataWithNoSuccess,
@@ -83,7 +92,9 @@ class ConverterTestCase: XCTestCase {
     }
 
     func testRatesLoaderFailureWhenResponseDataHasMissingField() {
-        let expectation = TestsHelper.testLoaderResultData(
+        let loader = TestsHelper.buildTestLoader(RatesRequest())
+
+        let expectation = TestsHelper.testLoaderExpectedResultData(
             loader,
             requestInputData: Self.requestInputDataOK,
             responseData: Self.responseDataWithMissingField,
@@ -94,7 +105,9 @@ class ConverterTestCase: XCTestCase {
     }
 
     func testRatesLoaderFailureWhenDataIsBadJson() {
-        let expectation = TestsHelper.testLoaderResultData(
+        let loader = TestsHelper.buildTestLoader(RatesRequest())
+
+        let expectation = TestsHelper.testLoaderExpectedResultData(
             loader,
             requestInputData: Self.requestInputDataOK,
             responseData: Self.fakeResponseData.badJsondata,
@@ -105,7 +118,9 @@ class ConverterTestCase: XCTestCase {
     }
 
     func testRatesLoaderFailureWhenHTTPResponseStatusCodeIsNot200() {
-        let expectation = TestsHelper.testLoaderResultData(
+        let loader = TestsHelper.buildTestLoader(RatesRequest())
+
+        let expectation = TestsHelper.testLoaderExpectedResultData(
             loader,
             requestInputData: Self.requestInputDataOK,
             responseData: Self.fakeResponseData.dataOK,
@@ -116,13 +131,17 @@ class ConverterTestCase: XCTestCase {
     }
 
     func testRatesLoaderFailureWhenErrorIsThrownDuringLoading() {
-        let expectation = TestsHelper.testLoaderFailureWhenErrorIsThrownDuringLoading(
+        let loader = TestsHelper.buildTestLoader(RatesRequest())
+
+        let expectation = TestsHelper.testLoaderExpectedFailureWhenErrorIsThrownDuringLoading(
             loader,
             requestInputData: Self.requestInputDataOK,
             thrownError: FakeResponseData.error
         )
         wait(for: [expectation], timeout: 1)
     }
+
+    // Converter tests
 
     func testConverterInitializationAndConputation() {
         let converter = Converter(ratesData: Self.requestResultDataOK)!

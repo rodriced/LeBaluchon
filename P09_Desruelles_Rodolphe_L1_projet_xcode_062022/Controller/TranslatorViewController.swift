@@ -13,52 +13,62 @@ struct Language {
 }
 
 class TranslatorViewController: UIViewController, UITextViewDelegate {
-    var sourceTextViewPlaceholderDisplayed: Bool!
-    let placeHolderText = "Tapez un texte"
-
     var sourceLanguage = Language(name: "Français", symbol: "fr")
     var targetLanguage = Language(name: "Anglais", symbol: "en")
 
-    // Model interface //
+    // Model //
+    // -------//
 
     let translationLoader = APIRequestLoader(apiRequest: TranslationRequest())
 
     // View Components //
+    // -----------------//
 
     @IBOutlet var sourceLanguageLabel: UILabel!
     @IBOutlet var targetLanguageLabel: UILabel!
-    
+
     @IBOutlet var sourceTextView: UITextView!
     @IBOutlet var targetTextView: UITextView!
-    
+
     @IBOutlet var translateButton: UIButton!
 
     let translationLoadingFailureAlert = ControllerHelper.simpleAlert(message: "Impossible de récupérer la traduction.")
 
     // Events //
+    // --------//
 
     @IBAction func translateButtonTapped() {
-        print("translateButtonTapped")
-        guard !sourceTextView.text.isEmpty, !sourceTextViewPlaceholderDisplayed else { return }
-
-        updateTargetTextViewTranslation()
+//        print("translateButtonTapped")
+        updateTargetTextView()
     }
 
     @IBAction func languageSwitchButton(_ sender: UIButton) {
         switchLanguages()
     }
 
-    // UITextViewDelegate (for TextView placeholder and translate button states)
+    // Keyboard management
+
+    private func initGestureForLeavingEditMode() {
+        let tap = UITapGestureRecognizer(
+            target: self,
+            action: #selector(leaveEditMode)
+        )
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func leaveEditMode() {
+        view.endEditing(true)
+    }
+
+    // UITextViewDelegate protocol implementation
+    // for sourceTextView placeholder and translate button states management
 
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         guard textView == sourceTextView else { return true }
 
-        if sourceTextViewPlaceholderDisplayed {
+        if sourceTextViewPlaceholderIsDisplayed {
             hideSourceTextViewPlaceholder()
         }
-
-        updateTranslateButtonState()
-
         return true
     }
 
@@ -73,37 +83,71 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         guard textView == sourceTextView else { return }
 
-        if sourceTextViewPlaceholderDisplayed {
+        if sourceTextViewPlaceholderIsDisplayed {
             hideSourceTextViewPlaceholder()
         }
-        
-        updateTranslateButtonState()
+
+//        updateTranslateButtonState()
+        translateButton.isEnabled = sourceTextViewContainsTypedText
     }
 
-    // Keyboard management
+    // sourceTextView Placeholder Management Logic
 
-    @objc func hideKeyboard() {
-        view.endEditing(true)
+    let placeHolderText = "Tapez un texte"
+
+    var sourceTextViewPlaceholderIsDisplayed: Bool!
+    var sourceTextViewContainsTypedText: Bool {
+        !sourceTextView.text.isEmpty && !sourceTextViewPlaceholderIsDisplayed
     }
 
-    private func initHideKeyboardEvent() {
-        let tap = UITapGestureRecognizer(
-            target: self,
-            action: #selector(hideKeyboard)
-        )
-        view.addGestureRecognizer(tap)
+    func hideSourceTextViewPlaceholder() {
+        sourceTextView.textColor = UIColor.darkText
+        sourceTextView.text.removeFirst(placeHolderText.count)
+        sourceTextViewPlaceholderIsDisplayed = false
+    }
+
+    func displaySourceTextViewPlaceholder() {
+        sourceTextViewPlaceholderIsDisplayed = true
+        sourceTextView.textColor = UIColor.lightGray
+        sourceTextView.text = placeHolderText
     }
 
     // Logic //
+    // -------//
 
     func switchLanguages() {
         (sourceLanguage, targetLanguage) = (targetLanguage, sourceLanguage)
         initInterface()
+        leaveEditMode()
+//        sourceTextView.endEditing(true)
     }
 
-    func updateTargetTextViewTranslation() {
+//    func translate() {
+//        guard sourceTextViewContainsTypedText else { return }
+//
+//        leaveEditMode()
+//        updateTargetTextView()
+//    }
+//
+
+//    func loadTranslation(completionHandler: @escaping (String?) -> Void) {
+//        let requestInputData = TranslationRequestInputData(
+//            targetLanguage: targetLanguage.symbol,
+//            sourceLanguage: sourceLanguage.symbol,
+//            text: sourceTextView.text ?? ""
+//        )
+//
+//        translationLoader.load(requestInputData: requestInputData) {
+//            result in
+//            result.map { completionHandler($0[0].translations[0].text) }
+////            completionHandler(result[0].translations[0].text)
+//        }
+//    }
+
+    func updateTargetTextView() {
+        leaveEditMode()
         translateButton.isEnabled = false
-        
+
         let requestInputData = TranslationRequestInputData(
             targetLanguage: targetLanguage.symbol,
             sourceLanguage: sourceLanguage.symbol,
@@ -112,39 +156,27 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
 
 //        print("Load - \(requestInputData)")
 
-        translationLoader.load(requestInputData: requestInputData) {
-            result in
+        translationLoader.load(requestInputData) {
+            translatedText in
             DispatchQueue.main.async {
                 self.translateButton.isEnabled = true
 
-                guard let result = result else {
+                guard let translatedText = translatedText else {
                     return self.present(self.translationLoadingFailureAlert, animated: true, completion: nil)
                 }
 
 //                print("Load Result- \(result)")
 
-                self.targetTextView.text = result[0].translations[0].text
+                self.targetTextView.text = translatedText
             }
         }
     }
 
-    func hideSourceTextViewPlaceholder() {
-        sourceTextView.textColor = UIColor.darkText
-        sourceTextView.text.removeFirst(placeHolderText.count)
-        sourceTextViewPlaceholderDisplayed = false
-    }
-
-    func displaySourceTextViewPlaceholder() {
-        sourceTextViewPlaceholderDisplayed = true
-        sourceTextView.textColor = UIColor.lightGray
-        sourceTextView.text = placeHolderText
-    }
-
-    func updateTranslateButtonState() {
-        translateButton.isEnabled = !sourceTextView.text.isEmpty && !sourceTextViewPlaceholderDisplayed
-        
-//        print("Translate button enabled = \(translateButton.isEnabled)")
-    }
+//    func updateTranslateButtonState() {
+//        translateButton.isEnabled = sourceTextViewContainsTypedText
+//
+    ////        print("Translate button enabled = \(translateButton.isEnabled)")
+//    }
 
     func setupDesign() {
         sourceTextView.layer.borderWidth = 0.5
@@ -168,11 +200,9 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
 
         sourceTextView.delegate = self
-
-        initHideKeyboardEvent()
+        initGestureForLeavingEditMode()
 
         setupDesign()
-
         initInterface()
     }
 

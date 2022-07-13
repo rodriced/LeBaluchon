@@ -20,7 +20,7 @@ class TestsHelper {
         return APIRequestLoader(apiRequest: apiRequest, urlSession: urlSession)
     }
     
-    static func testLoaderResultData<T: APIRequest>(
+    static func testLoaderExpectedResultData<T: APIRequest>(
         _ loader: APIRequestLoader<T>,
         requestInputData: T.InputDataType,
         responseData: Data,
@@ -32,14 +32,14 @@ class TestsHelper {
         }
 
         let expectation = XCTestExpectation(description: "response")
-        loader.load(requestInputData: requestInputData) { rates in
-            XCTAssertEqual(rates, expectedResultData)
+        loader.load(requestInputData) { result in
+            XCTAssertEqual(result, expectedResultData)
             expectation.fulfill()
         }
         return expectation
     }
     
-    static func testLoaderFailureWhenErrorIsThrownDuringLoading<T: APIRequest>(
+    static func testLoaderExpectedFailureWhenErrorIsThrownDuringLoading<T: APIRequest>(
         _ loader: APIRequestLoader<T>,
         requestInputData: T.InputDataType,
         thrownError: Error
@@ -49,8 +49,8 @@ class TestsHelper {
         }
 
         let expectation = XCTestExpectation(description: "response")
-        loader.load(requestInputData: requestInputData) { rates in
-            XCTAssertEqual(rates, nil)
+        loader.load(requestInputData) { result in
+            XCTAssertNil(result)
             expectation.fulfill()
         }
         return expectation
