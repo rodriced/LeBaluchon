@@ -36,11 +36,11 @@ class TownWeatherInterface {
     }
     
     func clear() {
-        timeLabel.text = ""
+        timeLabel.text = " "
         weatherIcon.isHidden = true
         loadingIndicator.isHidden = false
-        weatherDescriptionLabel.text = ""
-        temperatureLabel.text = ""
+        weatherDescriptionLabel.text = " "
+        temperatureLabel.text = " "
     }
     
     func update(data: WeatherData) {
