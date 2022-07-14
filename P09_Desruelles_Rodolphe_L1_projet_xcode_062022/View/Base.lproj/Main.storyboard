@@ -407,6 +407,7 @@
                         <segue destination="cIF-oF-KOD" kind="relationship" relationship="viewControllers" id="BR6-mG-4Ez"/>
                         <segue destination="1es-bD-hj7" kind="relationship" relationship="viewControllers" id="QKZ-oK-KYs"/>
                         <segue destination="a63-Bp-rJN" kind="relationship" relationship="viewControllers" id="X19-kS-2ZH"/>
+                        <segue destination="fXe-Pl-n7W" kind="relationship" relationship="viewControllers" id="LqZ-yg-Cfp"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vMr-Qn-yuc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -479,6 +480,148 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qif-Jp-FaK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-49.275362318840585" y="948.88392857142856"/>
+        </scene>
+        <!--Translator-->
+        <scene sceneID="X6M-k5-Vua">
+            <objects>
+                <viewController id="RhK-dq-XQu" userLabel="Translator" customClass="TranslatorViewController" customModule="P09_Desruelles_Rodolphe_L1_projet_xcode_062022" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kls-4i-m5p">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gD5-GM-lWe">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="LBz-8W-2fu">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="725.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Français" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zr6-Rg-WYC" userLabel="Source Language Label">
+                                                <rect key="frame" x="20" y="20" width="374" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <color key="textColor" name="Travel"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DiS-Yp-GeA">
+                                                <rect key="frame" x="20" y="64" width="374" height="290"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="textColor" systemColor="labelColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jmB-n2-ndf">
+                                                <rect key="frame" x="20" y="374" width="374" height="50"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yhB-ed-cbN">
+                                                        <rect key="frame" x="112" y="5" width="150" height="40"/>
+                                                        <color key="backgroundColor" name="AccentColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="9DP-Ql-JXg"/>
+                                                            <constraint firstAttribute="height" constant="40" id="eaQ-Jv-V9w"/>
+                                                        </constraints>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="Traduire" image="arrow.down" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="translateButtonTapped" destination="RhK-dq-XQu" eventType="touchUpInside" id="3sl-bs-HGc"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sgj-8M-frh" userLabel="Switch Button">
+                                                        <rect key="frame" x="20" y="12.5" width="31" height="25.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                        <color key="tintColor" name="Travel"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title=" ">
+                                                            <imageReference key="image" image="arrow.up.arrow.down.square.fill" catalog="system" symbolScale="large"/>
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="black"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="languageSwitchButton:" destination="RhK-dq-XQu" eventType="touchUpInside" id="H8Y-9i-B13"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="yhB-ed-cbN" firstAttribute="centerY" secondItem="jmB-n2-ndf" secondAttribute="centerY" id="18C-pr-jFa"/>
+                                                    <constraint firstAttribute="height" constant="50" id="9vm-20-d9S"/>
+                                                    <constraint firstItem="sgj-8M-frh" firstAttribute="leading" secondItem="jmB-n2-ndf" secondAttribute="leading" constant="20" id="OY2-Du-g7f"/>
+                                                    <constraint firstItem="yhB-ed-cbN" firstAttribute="centerX" secondItem="jmB-n2-ndf" secondAttribute="centerX" id="gfI-8z-oz1"/>
+                                                    <constraint firstItem="sgj-8M-frh" firstAttribute="centerY" secondItem="jmB-n2-ndf" secondAttribute="centerY" id="z8S-zt-j1c"/>
+                                                    <constraint firstItem="yhB-ed-cbN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sgj-8M-frh" secondAttribute="trailing" constant="8" symbolic="YES" id="zmb-xe-yJO"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anglais" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lDv-fR-Fuf" userLabel="Target Language Label">
+                                                <rect key="frame" x="20" y="444" width="374" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <color key="textColor" name="Travel"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1y7-in-ern">
+                                                <rect key="frame" x="20" y="488" width="374" height="217.5"/>
+                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" systemColor="labelColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <edgeInsets key="layoutMargins" top="20" left="20" bottom="20" right="20"/>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="AOa-5H-R04" firstAttribute="width" secondItem="LBz-8W-2fu" secondAttribute="width" id="0S5-vw-Dna"/>
+                                    <constraint firstItem="LBz-8W-2fu" firstAttribute="leading" secondItem="icq-Cl-qAy" secondAttribute="leading" id="FZf-xh-Oa8"/>
+                                    <constraint firstItem="LBz-8W-2fu" firstAttribute="top" secondItem="icq-Cl-qAy" secondAttribute="top" id="h7e-fk-YLJ"/>
+                                    <constraint firstItem="icq-Cl-qAy" firstAttribute="bottom" secondItem="LBz-8W-2fu" secondAttribute="bottom" id="uNW-O1-SFw"/>
+                                    <constraint firstItem="icq-Cl-qAy" firstAttribute="trailing" secondItem="LBz-8W-2fu" secondAttribute="trailing" id="xNZ-t1-A8W"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="icq-Cl-qAy"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="AOa-5H-R04"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="9Em-Nt-3IO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gD5-GM-lWe" firstAttribute="trailing" secondItem="9Em-Nt-3IO" secondAttribute="trailing" id="8x4-Q7-7kK"/>
+                            <constraint firstItem="gD5-GM-lWe" firstAttribute="leading" secondItem="9Em-Nt-3IO" secondAttribute="leading" id="Csf-u2-wJJ"/>
+                            <constraint firstItem="9Em-Nt-3IO" firstAttribute="bottom" secondItem="gD5-GM-lWe" secondAttribute="bottom" id="X3p-gp-7RA"/>
+                            <constraint firstItem="gD5-GM-lWe" firstAttribute="top" secondItem="9Em-Nt-3IO" secondAttribute="top" id="ZRS-ic-VLl"/>
+                            <constraint firstItem="1y7-in-ern" firstAttribute="height" secondItem="9Em-Nt-3IO" secondAttribute="height" multiplier="0.3" id="eIM-DZ-26j"/>
+                            <constraint firstItem="DiS-Yp-GeA" firstAttribute="height" secondItem="9Em-Nt-3IO" secondAttribute="height" multiplier="0.4" id="ent-DX-OHG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Traduction" id="ll3-Gw-Js7"/>
+                    <connections>
+                        <outlet property="sourceLanguageLabel" destination="zr6-Rg-WYC" id="FjQ-gu-Fmz"/>
+                        <outlet property="sourceTextView" destination="DiS-Yp-GeA" id="Ix1-P1-rlB"/>
+                        <outlet property="targetLanguageLabel" destination="lDv-fR-Fuf" id="cDM-Qq-RBA"/>
+                        <outlet property="targetTextView" destination="1y7-in-ern" id="Rxi-aD-l7J"/>
+                        <outlet property="translateButton" destination="yhB-ed-cbN" id="ucd-M3-eG5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8qT-Ql-7bj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2499" y="982"/>
+        </scene>
+        <!--Translator-->
+        <scene sceneID="cls-mB-nEK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fXe-Pl-n7W" userLabel="Translator" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Traducteur" image="text.bubble" catalog="system" id="wlV-A1-42Z"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PnN-O0-ugP">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" name="Travel"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="RhK-dq-XQu" kind="relationship" relationship="rootViewController" id="fQa-hX-dPP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oJg-Ym-NbR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1588" y="1000"/>
         </scene>
     </scenes>
     <resources>
