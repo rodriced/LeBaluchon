@@ -8,7 +8,8 @@
 import UIKit
 
 class ConverterViewController: UIViewController {
-    let testing = true
+    let testing = false // true for development, false for production.
+    // To simulate API acces because there is a limited number of request in the free fixer.io account
 
     let baseCurrency = "EUR"
     let targetCurrency = "USD"
@@ -43,8 +44,8 @@ class ConverterViewController: UIViewController {
     @IBOutlet var refreshButton: UIBarButtonItem!
 
     // Events //
-    //--------//
-    
+    // --------//
+
     @IBAction func amountTextFieldDidChange(_ sender: UITextField) {
         updateResultLabel()
     }
@@ -62,8 +63,8 @@ class ConverterViewController: UIViewController {
     }
 
     // Logic //
-    //-------//
-    
+    // -------//
+
     @objc func leaveEditMode() {
         view.endEditing(true)
     }
@@ -128,8 +129,6 @@ class ConverterViewController: UIViewController {
     private func setupConverter() {
         setRateLoadingState(.loadingInProgress)
 
-//        let requestData = RatesRequestData(baseCurrency: baseCurrency, targetCurrency: targetCurrency)
-//        ratesLoader.load(requestData: requestData) { ratesData in
         loadRatesData() { ratesData in
 
             DispatchQueue.main.async {

@@ -7,6 +7,8 @@
 
 import Foundation
 
+// The current currency rate is retrieve with the fixer.io API
+
 // API Request result data
 
 struct RatesData: Decodable, Equatable {
@@ -79,7 +81,7 @@ struct RatesRequest: APIRequest {
     }
 }
 
-// Converter
+// Currency converter
 
 class Converter {
     let baseCurrency: String

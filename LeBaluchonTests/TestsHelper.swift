@@ -12,6 +12,7 @@ import XCTest
 
 class TestsHelper {
     
+    // Creating an APILoader with fake URLSession for testing without using network access
     static func buildTestLoader<T: APIRequest>(_ apiRequest: T) -> APIRequestLoader<T> {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [MockURLProtocol.self]
@@ -19,6 +20,8 @@ class TestsHelper {
 
         return APIRequestLoader(apiRequest: apiRequest, urlSession: urlSession)
     }
+    
+    // Reusable loader test functions
     
     static func testLoaderExpectedResultData<T: APIRequest>(
         _ loader: APIRequestLoader<T>,

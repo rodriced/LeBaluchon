@@ -127,7 +127,7 @@ class WeatherViewController: UIViewController {
         loadings = 2
     }
     
-    func loadingEnded() {
+    func OneLoadingDidEnd() {
         loadings -= 1
         if loadings == 0 {
             refreshButton.isEnabled = true
@@ -148,6 +148,7 @@ class WeatherViewController: UIViewController {
     
     func loadTownWeather(for town: Town, completionHandler: @escaping (WeatherData) -> Void) {
         let requestInputData = WeatherRequestInputData(latitude: town.latitude, longitude: town.longitude)
+        
         weatherLoader.load(requestInputData) { weatherData in
             DispatchQueue.main.async {
                 guard let weatherData = weatherData else {
@@ -157,7 +158,7 @@ class WeatherViewController: UIViewController {
 
                 completionHandler(weatherData)
                 
-                self.loadingEnded()
+                self.OneLoadingDidEnd()
             }
         }
     }

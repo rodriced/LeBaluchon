@@ -7,6 +7,8 @@
 
 import XCTest
 
+// Mocking URLProtocol so we can inject some data when we do network request in testing context
+
 class MockURLProtocol: URLProtocol {
     static var requestHandler: ((URLRequest) throws -> (HTTPURLResponse, Data))?
     

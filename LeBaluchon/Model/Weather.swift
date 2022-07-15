@@ -7,6 +7,8 @@
 
 import Foundation
 
+// The current weather for a town is retrieve with the Openweather API
+
 // API Request Result Data
 
 struct WeatherDataElement: Equatable, Decodable {

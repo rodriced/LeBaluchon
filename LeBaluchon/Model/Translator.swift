@@ -7,6 +7,8 @@
 
 import Foundation
 
+// The translation is retrieve with the Microsoft translator API
+
 // API Request result data
 
 struct TranslationDataElement: Decodable, Equatable {
@@ -42,13 +44,14 @@ struct TranslationRequest: APIRequest {
 
     var subscriptionKey: String?
     var subscriptionRegion: String?
-    
-    init(subscriptionKey: String? = Bundle.main.infoDictionary?["MICROSOFT_TRANSLATOR_SUBSCRIPTION_KEY"] as? String
-         , subscriptionRegion: String? = Bundle.main.infoDictionary?["MICROSOFT_TRANSLATOR_SUBSCRIPTION_REGION"] as? String) {
+
+    init(subscriptionKey: String? = Bundle.main.infoDictionary?["MICROSOFT_TRANSLATOR_SUBSCRIPTION_KEY"] as? String,
+         subscriptionRegion: String? = Bundle.main.infoDictionary?["MICROSOFT_TRANSLATOR_SUBSCRIPTION_REGION"] as? String)
+    {
         self.subscriptionKey = subscriptionKey
         self.subscriptionRegion = subscriptionRegion
     }
-    
+
     func makeRequest(from inputData: TranslationRequestInputData) throws -> URLRequest {
         guard let subscriptionKey = subscriptionKey,
               let subscriptionRegion = subscriptionRegion

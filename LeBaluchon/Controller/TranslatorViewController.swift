@@ -60,8 +60,8 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
         view.endEditing(true)
     }
 
-    // UITextViewDelegate protocol implementation
-    // for sourceTextView placeholder and translate button states management
+    // ----- UITextViewDelegate protocol implementation
+    //      for sourceTextView placeholder and translate button states management
 
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         guard textView == sourceTextView else { return true }
@@ -87,9 +87,11 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
             hideSourceTextViewPlaceholder()
         }
 
-//        updateTranslateButtonState()
         translateButton.isEnabled = sourceTextViewContainsTypedText
     }
+
+    //
+    // -----
 
     // sourceTextView Placeholder Management Logic
 
@@ -113,36 +115,13 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
     }
 
     // Logic //
-    // -------//
+    // ------//
 
     func switchLanguages() {
         (sourceLanguage, targetLanguage) = (targetLanguage, sourceLanguage)
         initInterface()
         leaveEditMode()
-//        sourceTextView.endEditing(true)
     }
-
-//    func translate() {
-//        guard sourceTextViewContainsTypedText else { return }
-//
-//        leaveEditMode()
-//        updateTargetTextView()
-//    }
-//
-
-//    func loadTranslation(completionHandler: @escaping (String?) -> Void) {
-//        let requestInputData = TranslationRequestInputData(
-//            targetLanguage: targetLanguage.symbol,
-//            sourceLanguage: sourceLanguage.symbol,
-//            text: sourceTextView.text ?? ""
-//        )
-//
-//        translationLoader.load(requestInputData: requestInputData) {
-//            result in
-//            result.map { completionHandler($0[0].translations[0].text) }
-////            completionHandler(result[0].translations[0].text)
-//        }
-//    }
 
     func updateTargetTextView() {
         leaveEditMode()
@@ -154,8 +133,6 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
             text: sourceTextView.text ?? ""
         )
 
-//        print("Load - \(requestInputData)")
-
         translationLoader.load(requestInputData) {
             translatedText in
             DispatchQueue.main.async {
@@ -165,18 +142,10 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
                     return self.present(self.translationLoadingFailureAlert, animated: true, completion: nil)
                 }
 
-//                print("Load Result- \(result)")
-
                 self.targetTextView.text = translatedText
             }
         }
     }
-
-//    func updateTranslateButtonState() {
-//        translateButton.isEnabled = sourceTextViewContainsTypedText
-//
-    ////        print("Translate button enabled = \(translateButton.isEnabled)")
-//    }
 
     func setupDesign() {
         sourceTextView.layer.borderWidth = 0.5
