@@ -1,11 +1,11 @@
 //
 //  TestsHelper.swift
-//  P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests
+//  LeBaluchonTests
 //
 //  Created by Rodolphe Desruelles on 11/07/2022.
 //
 
-@testable import P09_Desruelles_Rodolphe_L1_projet_xcode_062022
+@testable import LeBaluchon
 
 import XCTest
 

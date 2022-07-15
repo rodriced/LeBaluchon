@@ -56,17 +56,17 @@
 		DC0D98452872F55700DD3B3E /* TranslatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorViewController.swift; sourceTree = "<group>"; };
 		DC0D98472873FEAA00DD3B3E /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		DC0D98492874F8E400DD3B3E /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
-		DC18B6532860F61600C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = P09_Desruelles_Rodolphe_L1_projet_xcode_062022.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC18B6532860F61600C90E88 /* LeBaluchon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeBaluchon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC18B6562860F61600C90E88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC18B6582860F61600C90E88 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		DC18B65D2860F61600C90E88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DC18B65F2860F61A00C90E88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC18B6622860F61A00C90E88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		DC18B6642860F61A00C90E88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "P09_Desruelles_Rodolphe_L1_projet_xcode_062022/Supporting Files/Info.plist"; sourceTree = SOURCE_ROOT; };
-		DC18B6692860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC18B6642860F61A00C90E88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "LeBaluchon/Supporting Files/Info.plist"; sourceTree = SOURCE_ROOT; };
+		DC18B6692860F61B00C90E88 /* LeBaluchonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeBaluchonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC18B68A28610FC900C90E88 /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 		DC18B68E28618FD100C90E88 /* ConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewController.swift; sourceTree = "<group>"; };
-		DC2FD5E2286AD93400143ECA /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
+		DC2FD5E2286AD93400143ECA /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Secret.xcconfig; path = "LeBaluchon/Supporting Files/Secret.xcconfig"; sourceTree = SOURCE_ROOT; };
 		DC64F7D0287F8A8700A22BB1 /* Secret_template.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret_template.xcconfig; sourceTree = "<group>"; };
 		DCAA4136287B1023009E962E /* ControllerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerHelper.swift; sourceTree = "<group>"; };
 		DCAA4138287B828F009E962E /* RatesDataNoSuccess.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RatesDataNoSuccess.json; sourceTree = "<group>"; };
@@ -100,8 +100,8 @@
 		DC18B64A2860F61600C90E88 = {
 			isa = PBXGroup;
 			children = (
-				DC18B6552860F61600C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022 */,
-				DC18B66C2860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests */,
+				DC18B6552860F61600C90E88 /* LeBaluchon */,
+				DC18B66C2860F61B00C90E88 /* LeBaluchonTests */,
 				DC18B6542860F61600C90E88 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -109,13 +109,13 @@
 		DC18B6542860F61600C90E88 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DC18B6532860F61600C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022.app */,
-				DC18B6692860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests.xctest */,
+				DC18B6532860F61600C90E88 /* LeBaluchon.app */,
+				DC18B6692860F61B00C90E88 /* LeBaluchonTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DC18B6552860F61600C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022 */ = {
+		DC18B6552860F61600C90E88 /* LeBaluchon */ = {
 			isa = PBXGroup;
 			children = (
 				DC18B6892860F91500C90E88 /* Supporting Files */,
@@ -123,10 +123,10 @@
 				DC18B6872860F8BE00C90E88 /* Controller */,
 				DC18B6862860F87E00C90E88 /* View */,
 			);
-			path = P09_Desruelles_Rodolphe_L1_projet_xcode_062022;
+			path = LeBaluchon;
 			sourceTree = "<group>";
 		};
-		DC18B66C2860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests */ = {
+		DC18B66C2860F61B00C90E88 /* LeBaluchonTests */ = {
 			isa = PBXGroup;
 			children = (
 				DC0D9835286C9A7400DD3B3E /* FakeResponseData.swift */,
@@ -143,8 +143,8 @@
 				DCAA4146287C6BA3009E962E /* WeatherDataMissingMainField.json */,
 				DCAA4148287C6BC8009E962E /* WeatherTestCase.swift */,
 			);
-			path = P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests;
-			sourceTree = "<group>";
+			path = LeBaluchonTests;
+			sourceTree = SOURCE_ROOT;
 		};
 		DC18B6862860F87E00C90E88 /* View */ = {
 			isa = PBXGroup;
@@ -193,9 +193,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DC18B6522860F61600C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022 */ = {
+		DC18B6522860F61600C90E88 /* LeBaluchon */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DC18B67D2860F61B00C90E88 /* Build configuration list for PBXNativeTarget "P09_Desruelles_Rodolphe_L1_projet_xcode_062022" */;
+			buildConfigurationList = DC18B67D2860F61B00C90E88 /* Build configuration list for PBXNativeTarget "LeBaluchon" */;
 			buildPhases = (
 				DC18B64F2860F61600C90E88 /* Sources */,
 				DC18B6502860F61600C90E88 /* Frameworks */,
@@ -205,14 +205,14 @@
 			);
 			dependencies = (
 			);
-			name = P09_Desruelles_Rodolphe_L1_projet_xcode_062022;
+			name = LeBaluchon;
 			productName = P09_Desruelles_Rodolphe_L1_projet_xcode_062022;
-			productReference = DC18B6532860F61600C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022.app */;
+			productReference = DC18B6532860F61600C90E88 /* LeBaluchon.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DC18B6682860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests */ = {
+		DC18B6682860F61B00C90E88 /* LeBaluchonTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DC18B6802860F61B00C90E88 /* Build configuration list for PBXNativeTarget "P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests" */;
+			buildConfigurationList = DC18B6802860F61B00C90E88 /* Build configuration list for PBXNativeTarget "LeBaluchonTests" */;
 			buildPhases = (
 				DC18B6652860F61B00C90E88 /* Sources */,
 				DC18B6662860F61B00C90E88 /* Frameworks */,
@@ -223,9 +223,9 @@
 			dependencies = (
 				DC18B66B2860F61B00C90E88 /* PBXTargetDependency */,
 			);
-			name = P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests;
+			name = LeBaluchonTests;
 			productName = P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests;
-			productReference = DC18B6692860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests.xctest */;
+			productReference = DC18B6692860F61B00C90E88 /* LeBaluchonTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -247,7 +247,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DC18B64E2860F61600C90E88 /* Build configuration list for PBXProject "P09_Desruelles_Rodolphe_L1_projet_xcode_062022" */;
+			buildConfigurationList = DC18B64E2860F61600C90E88 /* Build configuration list for PBXProject "LeBaluchon" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -260,8 +260,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DC18B6522860F61600C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022 */,
-				DC18B6682860F61B00C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests */,
+				DC18B6522860F61600C90E88 /* LeBaluchon */,
+				DC18B6682860F61B00C90E88 /* LeBaluchonTests */,
 			);
 		};
 /* End PBXProject section */
@@ -329,7 +329,7 @@
 /* Begin PBXTargetDependency section */
 		DC18B66B2860F61B00C90E88 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DC18B6522860F61600C90E88 /* P09_Desruelles_Rodolphe_L1_projet_xcode_062022 */;
+			target = DC18B6522860F61600C90E88 /* LeBaluchon */;
 			targetProxy = DC18B66A2860F61B00C90E88 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -480,7 +480,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "P09_Desruelles_Rodolphe_L1_projet_xcode_062022/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "LeBaluchon/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Le baluchon";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -509,7 +509,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "P09_Desruelles_Rodolphe_L1_projet_xcode_062022/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "LeBaluchon/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Le baluchon";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -545,7 +545,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/P09_Desruelles_Rodolphe_L1_projet_xcode_062022.app/P09_Desruelles_Rodolphe_L1_projet_xcode_062022";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LeBaluchon.app/LeBaluchon";
 			};
 			name = Debug;
 		};
@@ -564,14 +564,14 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/P09_Desruelles_Rodolphe_L1_projet_xcode_062022.app/P09_Desruelles_Rodolphe_L1_projet_xcode_062022";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LeBaluchon.app/LeBaluchon";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DC18B64E2860F61600C90E88 /* Build configuration list for PBXProject "P09_Desruelles_Rodolphe_L1_projet_xcode_062022" */ = {
+		DC18B64E2860F61600C90E88 /* Build configuration list for PBXProject "LeBaluchon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DC18B67B2860F61B00C90E88 /* Debug */,
@@ -580,7 +580,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DC18B67D2860F61B00C90E88 /* Build configuration list for PBXNativeTarget "P09_Desruelles_Rodolphe_L1_projet_xcode_062022" */ = {
+		DC18B67D2860F61B00C90E88 /* Build configuration list for PBXNativeTarget "LeBaluchon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DC18B67E2860F61B00C90E88 /* Debug */,
@@ -589,7 +589,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DC18B6802860F61B00C90E88 /* Build configuration list for PBXNativeTarget "P09_Desruelles_Rodolphe_L1_projet_xcode_062022Tests" */ = {
+		DC18B6802860F61B00C90E88 /* Build configuration list for PBXNativeTarget "LeBaluchonTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DC18B6812860F61B00C90E88 /* Debug */,
