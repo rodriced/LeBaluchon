@@ -11,9 +11,6 @@ class ConverterViewController: UIViewController {
     let testing = false // true for development, false for production.
     // To simulate API acces because there is a limited number of request in the free fixer.io account
 
-    let baseCurrency = "EUR"
-    let targetCurrency = "USD"
-
     private static var resultFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -24,13 +21,15 @@ class ConverterViewController: UIViewController {
     }()
 
     // Model //
-    // ------//
+    // ----- //
+
+    let config = Config.shared
 
     let ratesLoader = APIRequestLoader(apiRequest: RatesRequest())
     var converter: Converter?
 
     // View components //
-    // -----------------//
+    // --------------- //
 
     let rateLoadingFailureAlert = ControllerHelper.simpleAlert(message: "Impossible de récupérer le cours.")
 
@@ -44,7 +43,7 @@ class ConverterViewController: UIViewController {
     @IBOutlet var refreshButton: UIBarButtonItem!
 
     // Events //
-    // --------//
+    // ------ //
 
     @IBAction func amountTextFieldDidChange(_ sender: UITextField) {
         updateResultLabel()
@@ -63,7 +62,7 @@ class ConverterViewController: UIViewController {
     }
 
     // Logic //
-    // -------//
+    // ----- //
 
     @objc func leaveEditMode() {
         view.endEditing(true)
@@ -122,7 +121,8 @@ class ConverterViewController: UIViewController {
             return
         }
 
-        let requestInputData = RatesRequestInputData(baseCurrency: baseCurrency, targetCurrency: targetCurrency)
+        let requestInputData = RatesRequestInputData(baseCurrency: config.originPlace.currencySymbol,
+                                                     targetCurrency: config.destinationPlace.currencySymbol)
         ratesLoader.load(requestInputData, completionHandler: completionHandler)
     }
 

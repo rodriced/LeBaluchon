@@ -7,9 +7,9 @@
 
 import UIKit
 
-// Class for the weather of one town
+// Controller part for managing the weather UI of one town
 
-class TownWeatherInterface {
+class TownWeatherUI {
     var dateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.dateFormat = "HH:MM"
@@ -56,14 +56,6 @@ class TownWeatherInterface {
     }
 }
 
-// Town data
-
-struct Town {
-    let name: String
-    let latitude: Double
-    let longitude: Double
-}
-
 // Controller
 
 class WeatherViewController: UIViewController {
@@ -74,21 +66,21 @@ class WeatherViewController: UIViewController {
     }()
     
     // Model //
-    // -------//
+    // ----- //
     
     let weatherLoader = APIRequestLoader(apiRequest: WeatherRequest())
 
-    // Interface state //
-    // -----------------//
+    // UI state //
+    // -------- //
     
-    let originTown = Town(name: "Paris", latitude: 48.8588897, longitude: 2.3200410217200766)
-    let destinationTown = Town(name: "New-York", latitude: 40.7127281, longitude: -74.0060152)
+    let originTown = Config.shared.originPlace
+    let destinationTown = Config.shared.destinationPlace
             
-    var originWeatherInterface: TownWeatherInterface!
-    var destinationWeatherInterface: TownWeatherInterface!
+    var originWeatherUI: TownWeatherUI!
+    var destinationWeatherUI: TownWeatherUI!
     
     // View components //
-    // -----------------//
+    // --------------- //
 
     let weatherLoadingFailureAlert = ControllerHelper.simpleAlert(message: "Impossible de récupérer les données de météo.")
     
@@ -109,14 +101,14 @@ class WeatherViewController: UIViewController {
     @IBOutlet var refreshButton: UIBarButtonItem!
     
     // Events //
-    // --------//
+    // ------ //
     
     @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem) {
         loadWeather()
     }
     
     // Logic //
-    // -------//
+    // ----- //
 
     // Loading state
     
@@ -139,14 +131,14 @@ class WeatherViewController: UIViewController {
     func loadWeather() {
         initLoadings()
         
-        originWeatherInterface.clear()
-        destinationWeatherInterface.clear()
+        originWeatherUI.clear()
+        destinationWeatherUI.clear()
         
-        loadTownWeather(for: originTown, completionHandler: originWeatherInterface.update)
-        loadTownWeather(for: destinationTown, completionHandler: destinationWeatherInterface.update)
+        loadTownWeather(for: originTown, completionHandler: originWeatherUI.update)
+        loadTownWeather(for: destinationTown, completionHandler: destinationWeatherUI.update)
     }
     
-    func loadTownWeather(for town: Town, completionHandler: @escaping (WeatherData) -> Void) {
+    func loadTownWeather(for town: Place, completionHandler: @escaping (WeatherData) -> Void) {
         let requestInputData = WeatherRequestInputData(latitude: town.latitude, longitude: town.longitude)
         
         weatherLoader.load(requestInputData) { weatherData in
@@ -165,18 +157,18 @@ class WeatherViewController: UIViewController {
     
     // Init
     
-    func initInterface() {
+    func initUI() {
         originTownLabel.text = originTown.name
         destinationTownLabel.text = destinationTown.name
         
-        originWeatherInterface = TownWeatherInterface(
+        originWeatherUI = TownWeatherUI(
             timeLabel: originTimeLabel,
             weatherIcon: originWeatherIcon,
             weatherDescriptionLabel: originWeatherDescriptionLabel,
             temperatureLabel: originTemperatureLabel,
             loadingIndicator: originLoadingIndicator)
         
-        destinationWeatherInterface = TownWeatherInterface(
+        destinationWeatherUI = TownWeatherUI(
             timeLabel: destinationTimeLabel,
             weatherIcon: destinationWeatherIcon,
             weatherDescriptionLabel: destinationWeatherDescriptionLabel,
@@ -187,7 +179,7 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initInterface()
+        initUI()
         
         loadWeather()
     }

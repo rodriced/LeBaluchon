@@ -33,6 +33,7 @@
 		DCAA4145287C6B77009E962E /* WeatherDataOK.json in Resources */ = {isa = PBXBuildFile; fileRef = DCAA4144287C6B77009E962E /* WeatherDataOK.json */; };
 		DCAA4147287C6BA3009E962E /* WeatherDataMissingMainField.json in Resources */ = {isa = PBXBuildFile; fileRef = DCAA4146287C6BA3009E962E /* WeatherDataMissingMainField.json */; };
 		DCAA4149287C6BC8009E962E /* WeatherTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAA4148287C6BC8009E962E /* WeatherTestCase.swift */; };
+		DCEAE0E62881AEED00BE7C0F /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEAE0E52881AEED00BE7C0F /* Config.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		DCAA4144287C6B77009E962E /* WeatherDataOK.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WeatherDataOK.json; sourceTree = "<group>"; };
 		DCAA4146287C6BA3009E962E /* WeatherDataMissingMainField.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WeatherDataMissingMainField.json; sourceTree = "<group>"; };
 		DCAA4148287C6BC8009E962E /* WeatherTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherTestCase.swift; sourceTree = "<group>"; };
+		DCEAE0E52881AEED00BE7C0F /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 		DC18B6882860F8F800C90E88 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DCEAE0E52881AEED00BE7C0F /* Config.swift */,
 				DC0D983B286F992800DD3B3E /* APIRequestLoader.swift */,
 				DC18B68A28610FC900C90E88 /* Converter.swift */,
 				DC0D98432871FCC300DD3B3E /* Translator.swift */,
@@ -302,6 +305,7 @@
 				DC0D984A2874F8E400DD3B3E /* WeatherViewController.swift in Sources */,
 				DC18B68F28618FD100C90E88 /* ConverterViewController.swift in Sources */,
 				DC0D98462872F55700DD3B3E /* TranslatorViewController.swift in Sources */,
+				DCEAE0E62881AEED00BE7C0F /* Config.swift in Sources */,
 				DCAA4137287B1023009E962E /* ControllerHelper.swift in Sources */,
 				DC18B6572860F61600C90E88 /* AppDelegate.swift in Sources */,
 				DC0D98482873FEAA00DD3B3E /* Weather.swift in Sources */,

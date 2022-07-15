@@ -7,22 +7,18 @@
 
 import UIKit
 
-struct Language {
-    let name: String
-    let symbol: String
-}
-
 class TranslatorViewController: UIViewController, UITextViewDelegate {
-    var sourceLanguage = Language(name: "Français", symbol: "fr")
-    var targetLanguage = Language(name: "Anglais", symbol: "en")
-
     // Model //
-    // -------//
-
+    // ----- //
     let translationLoader = APIRequestLoader(apiRequest: TranslationRequest())
 
+    // UI state //
+    // -------- //
+    var sourceLanguage = Config.shared.originPlace.language
+    var targetLanguage = Config.shared.destinationPlace.language
+
     // View Components //
-    // -----------------//
+    // --------------- //
 
     @IBOutlet var sourceLanguageLabel: UILabel!
     @IBOutlet var targetLanguageLabel: UILabel!
@@ -35,7 +31,7 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
     let translationLoadingFailureAlert = ControllerHelper.simpleAlert(message: "Impossible de récupérer la traduction.")
 
     // Events //
-    // --------//
+    // ------ //
 
     @IBAction func translateButtonTapped() {
 //        print("translateButtonTapped")
@@ -115,7 +111,7 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
     }
 
     // Logic //
-    // ------//
+    // ----- //
 
     func switchLanguages() {
         (sourceLanguage, targetLanguage) = (targetLanguage, sourceLanguage)
