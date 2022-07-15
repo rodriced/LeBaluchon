@@ -38,7 +38,7 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
         updateTargetTextView()
     }
 
-    @IBAction func languageSwitchButton(_ sender: UIButton) {
+    @IBAction func languageSwitchButtonTapped(_ sender: UIButton) {
         switchLanguages()
     }
 

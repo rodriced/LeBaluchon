@@ -14,7 +14,7 @@
         <!--Converter-->
         <scene sceneID="a5q-hP-Zh2">
             <objects>
-                <viewController id="d3Z-25-jUD" userLabel="Converter" customClass="ConverterViewController" customModule="P09_Desruelles_Rodolphe_L1_projet_xcode_062022" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="d3Z-25-jUD" userLabel="Converter" customClass="ConverterViewController" customModule="LeBaluchon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a6k-cj-1gs">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -217,7 +217,7 @@
         <!--Translator-->
         <scene sceneID="X6M-k5-Vua">
             <objects>
-                <viewController id="RhK-dq-XQu" userLabel="Translator" customClass="TranslatorViewController" customModule="P09_Desruelles_Rodolphe_L1_projet_xcode_062022" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="RhK-dq-XQu" userLabel="Translator" customClass="TranslatorViewController" customModule="LeBaluchon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kls-4i-m5p">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -337,7 +337,7 @@
         <!--Weather-->
         <scene sceneID="MmB-26-ERH">
             <objects>
-                <viewController id="vBy-Wf-iSn" userLabel="Weather" customClass="WeatherViewController" customModule="P09_Desruelles_Rodolphe_L1_projet_xcode_062022" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vBy-Wf-iSn" userLabel="Weather" customClass="WeatherViewController" customModule="LeBaluchon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S86-W0-jNU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
