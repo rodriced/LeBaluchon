@@ -57,6 +57,7 @@
 		DC0D98452872F55700DD3B3E /* TranslatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorViewController.swift; sourceTree = "<group>"; };
 		DC0D98472873FEAA00DD3B3E /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		DC0D98492874F8E400DD3B3E /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		DC1286092881C3160076AD6B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		DC18B6532860F61600C90E88 /* LeBaluchon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeBaluchon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC18B6562860F61600C90E88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC18B6582860F61600C90E88 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +103,7 @@
 		DC18B64A2860F61600C90E88 = {
 			isa = PBXGroup;
 			children = (
+				DC1286092881C3160076AD6B /* README.md */,
 				DC18B6552860F61600C90E88 /* LeBaluchon */,
 				DC18B66C2860F61B00C90E88 /* LeBaluchonTests */,
 				DC18B6542860F61600C90E88 /* Products */,
