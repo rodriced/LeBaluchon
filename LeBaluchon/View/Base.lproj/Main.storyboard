@@ -268,7 +268,7 @@
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="black"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="languageSwitchButton:" destination="RhK-dq-XQu" eventType="touchUpInside" id="H8Y-9i-B13"/>
+                                                            <action selector="languageSwitchButtonTapped:" destination="RhK-dq-XQu" eventType="touchUpInside" id="lrw-Qd-X0x"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
