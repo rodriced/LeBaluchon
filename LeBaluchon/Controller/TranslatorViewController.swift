@@ -27,6 +27,9 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
     @IBOutlet var targetTextView: UITextView!
 
     @IBOutlet var translateButton: UIButton!
+    @IBOutlet var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet var errorImage: UIImageView!
+    
 
     let translationLoadingFailureAlert = ControllerHelper.simpleAlert(message: "Impossible de récupérer la traduction.")
 
@@ -122,6 +125,8 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
     func updateTargetTextView() {
         leaveEditMode()
         translateButton.isEnabled = false
+        loadingIndicator.isHidden = false
+        errorImage.isHidden = true
 
         let requestInputData = TranslationRequestInputData(
             targetLanguage: targetLanguage.symbol,
@@ -133,8 +138,10 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
             translatedText in
             DispatchQueue.main.async {
                 self.translateButton.isEnabled = true
+                self.loadingIndicator.isHidden = true
 
                 guard let translatedText = translatedText else {
+                    self.errorImage.isHidden = false
                     return self.present(self.translationLoadingFailureAlert, animated: true, completion: nil)
                 }
 
@@ -153,6 +160,8 @@ class TranslatorViewController: UIViewController, UITextViewDelegate {
 
     func initInterface() {
         translateButton.isEnabled = false
+        loadingIndicator.isHidden = true
+        errorImage.isHidden = true
 
         displaySourceTextViewPlaceholder()
         targetTextView.text = ""
