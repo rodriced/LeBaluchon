@@ -8,7 +8,7 @@
 import UIKit
 
 class ConverterViewController: UIViewController {
-    let testing = true // true for development, false for production.
+    let testing = false // true for development, false for production.
     // To simulate API acces because there is a limited number of request in the free fixer.io account
 
     private static var resultFormatter: NumberFormatter = {
