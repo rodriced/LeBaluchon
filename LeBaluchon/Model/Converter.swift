@@ -66,7 +66,7 @@ struct RatesRequest: APIRequest {
             URLQueryItem(name: "symbols", value: inputData.targetCurrencies.joined(separator: ","))
         ]
 
-        var request = URLRequest(url: components.url!)
+        var request = URLRequest(url: components.url!, timeoutInterval: 10.0)
         request.addValue(apikey, forHTTPHeaderField: "apikey")
 
         return request

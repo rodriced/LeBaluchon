@@ -8,7 +8,7 @@
 import UIKit
 
 class ConverterViewController: UIViewController {
-    let testing = false // true for development, false for production.
+    let testing = true // true for development, false for production.
     // To simulate API acces because there is a limited number of request in the free fixer.io account
 
     private static var resultFormatter: NumberFormatter = {
@@ -126,6 +126,11 @@ class ConverterViewController: UIViewController {
         ratesLoader.load(requestInputData, completionHandler: completionHandler)
     }
 
+    func updateRateLabel(_ rate: Double) {
+        self.rateLabel.text = String(rate)
+                              + (self.testing ? " (TESTING)":"")
+    }
+    
     private func setupConverter() {
         setRateLoadingState(.loadingInProgress)
 
@@ -141,7 +146,7 @@ class ConverterViewController: UIViewController {
                 }
 
                 self.converter = converter
-                self.rateLabel.text = String(converter.rate)
+                self.updateRateLabel(converter.rate)
                 self.setRateLoadingState(.loaded)
                 self.updateResultLabel()
             }
@@ -160,13 +165,4 @@ class ConverterViewController: UIViewController {
         setupConverter()
     }
 
-    /*
-     // MARK: - Navigation
-
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destination.
-         // Pass the selected object to the new view controller.
-     }
-     */
 }

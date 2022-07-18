@@ -16,29 +16,47 @@ class TownWeatherUI {
         return df
     }()
     
+    var town: Place
+    
     var timeLabel: UILabel
     var weatherIcon: UIImageView
     var weatherDescriptionLabel: UILabel
     var temperatureLabel: UILabel
     var loadingIndicator: UIActivityIndicatorView
+    var errorImage: UIImageView
     
-    init(timeLabel: UILabel,
+    init(town: Place,
+         timeLabel: UILabel,
          weatherIcon: UIImageView,
          weatherDescriptionLabel: UILabel,
          temperatureLabel: UILabel,
-         loadingIndicator: UIActivityIndicatorView)
+         loadingIndicator: UIActivityIndicatorView,
+         errorImage: UIImageView
+    )
     {
+        self.town = town
         self.timeLabel = timeLabel
         self.weatherIcon = weatherIcon
         self.weatherDescriptionLabel = weatherDescriptionLabel
         self.temperatureLabel = temperatureLabel
         self.loadingIndicator = loadingIndicator
+        self.errorImage = errorImage
     }
     
     func clear() {
         timeLabel.text = " "
         weatherIcon.isHidden = true
         loadingIndicator.isHidden = false
+        errorImage.isHidden = true
+        weatherDescriptionLabel.text = " "
+        temperatureLabel.text = " "
+    }
+    
+    func displayError() {
+        timeLabel.text = " "
+        weatherIcon.isHidden = true
+        loadingIndicator.isHidden = true
+        errorImage.isHidden = false
         weatherDescriptionLabel.text = " "
         temperatureLabel.text = " "
     }
@@ -90,6 +108,7 @@ class WeatherViewController: UIViewController {
     @IBOutlet var originWeatherDescriptionLabel: UILabel!
     @IBOutlet var originTemperatureLabel: UILabel!
     @IBOutlet var originLoadingIndicator: UIActivityIndicatorView!
+    @IBOutlet var originErrorImage: UIImageView!
     
     @IBOutlet var destinationTownLabel: UILabel!
     @IBOutlet var destinationTimeLabel: UILabel!
@@ -97,6 +116,7 @@ class WeatherViewController: UIViewController {
     @IBOutlet var destinationWeatherDescriptionLabel: UILabel!
     @IBOutlet var destinationTemperatureLabel: UILabel!
     @IBOutlet var destinationLoadingIndicator: UIActivityIndicatorView!
+    @IBOutlet var destinationErrorImage: UIImageView!
     
     @IBOutlet var refreshButton: UIBarButtonItem!
     
@@ -112,49 +132,62 @@ class WeatherViewController: UIViewController {
 
     // Loading state
     
-    var loadings = 0
+    var loadingsInProgress = 0
     
-    func initLoadings() {
+    func loadingsStrating() {
         refreshButton.isEnabled = false
-        loadings = 2
+        loadingsInProgress = 2
     }
     
-    func OneLoadingDidEnd() {
-        loadings -= 1
-        if loadings == 0 {
+    func OneLoadingSuccessfull() {
+        loadingsInProgress -= 1
+        if loadingsInProgress == 0 {
             refreshButton.isEnabled = true
         }
     }
     
+    func OneLoadingEndingWithError(for ui: TownWeatherUI) {
+        loadingsInProgress -= 1
+        ui.displayError()
+
+        if !weatherLoadingFailureAlert.isBeingPresented {
+            self.present(self.weatherLoadingFailureAlert, animated: true) {
+                if self.loadingsInProgress == 0 {
+                    self.refreshButton.isEnabled = true
+                }
+            }
+        }
+    }
+        
     // Weather loading
     
     func loadWeather() {
-        initLoadings()
-        
+        loadingsStrating()
+
         originWeatherUI.clear()
         destinationWeatherUI.clear()
-        
-        loadTownWeather(for: originTown, completionHandler: originWeatherUI.update)
-        loadTownWeather(for: destinationTown, completionHandler: destinationWeatherUI.update)
+
+        loadTownWeather(for: originWeatherUI, completionHandler: originWeatherUI.update)
+        loadTownWeather(for: destinationWeatherUI, completionHandler: destinationWeatherUI.update)
     }
-    
-    func loadTownWeather(for town: Place, completionHandler: @escaping (WeatherData) -> Void) {
-        let requestInputData = WeatherRequestInputData(latitude: town.latitude, longitude: town.longitude)
-        
+
+    func loadTownWeather(for ui: TownWeatherUI, completionHandler: @escaping (WeatherData) -> Void) {
+        let requestInputData = WeatherRequestInputData(latitude: ui.town.latitude, longitude: ui.town.longitude)
+
         weatherLoader.load(requestInputData) { weatherData in
             DispatchQueue.main.async {
                 guard let weatherData = weatherData else {
-                    self.present(self.weatherLoadingFailureAlert, animated: true, completion: nil)
+                    self.OneLoadingEndingWithError(for: ui)
                     return
                 }
 
                 completionHandler(weatherData)
-                
-                self.OneLoadingDidEnd()
+
+                self.OneLoadingSuccessfull()
             }
         }
     }
-    
+
     // Init
     
     func initUI() {
@@ -162,18 +195,24 @@ class WeatherViewController: UIViewController {
         destinationTownLabel.text = destinationTown.name
         
         originWeatherUI = TownWeatherUI(
+            town: originTown,
             timeLabel: originTimeLabel,
             weatherIcon: originWeatherIcon,
             weatherDescriptionLabel: originWeatherDescriptionLabel,
             temperatureLabel: originTemperatureLabel,
-            loadingIndicator: originLoadingIndicator)
+            loadingIndicator: originLoadingIndicator,
+            errorImage: originErrorImage
+        )
         
         destinationWeatherUI = TownWeatherUI(
+            town: destinationTown,
             timeLabel: destinationTimeLabel,
             weatherIcon: destinationWeatherIcon,
             weatherDescriptionLabel: destinationWeatherDescriptionLabel,
             temperatureLabel: destinationTemperatureLabel,
-            loadingIndicator: destinationLoadingIndicator)
+            loadingIndicator: destinationLoadingIndicator,
+            errorImage: destinationErrorImage
+        )
     }
     
     override func viewDidLoad() {
@@ -184,13 +223,4 @@ class WeatherViewController: UIViewController {
         loadWeather()
     }
     
-    /*
-     // MARK: - Navigation
-
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destination.
-         // Pass the selected object to the new view controller.
-     }
-     */
 }

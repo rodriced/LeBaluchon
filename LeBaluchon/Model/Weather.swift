@@ -84,9 +84,7 @@ struct WeatherRequest: APIRequest {
             URLQueryItem(name: "appid", value: apiKey)
         ]
 
-        let request = URLRequest(url: components.url!)
-        print(request)
-        return request
+        return URLRequest(url: components.url!, timeoutInterval: 10.0)
     }
 
     func parseResponse(data: Data) throws -> WeatherData {
